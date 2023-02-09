@@ -21,7 +21,6 @@ Creación de una web recoja información de la api de https://www.api-football.c
 
 # ✒️ Jugadores Favoritos
 
-![image](https://user-images.githubusercontent.com/117438320/217769596-f9276ebc-21e4-43be-8f74-9e97b9cfdfcd.png)
 
 
 
