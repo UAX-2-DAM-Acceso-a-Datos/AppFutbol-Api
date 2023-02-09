@@ -1,5 +1,8 @@
 # AppFutbol-Api
 
+![image](https://user-images.githubusercontent.com/117438320/217785413-92b1e659-5ea5-4c14-ab41-92138616e329.png)
+
+
 
 
 Creación de una web recoja información de la api de https://www.api-football.com/documentation-v3
@@ -8,12 +11,10 @@ Creación de una web recoja información de la api de https://www.api-football.c
 
 ## 📋 Tareas 
 
-# ✒️ Funcionalidad 1
+# ✒️ Equipos
 
 
-
-# ✒️ Funcionalidad 2
-
+# ✒️ Estadios
 
 
 # ✒️ Equipos Favoritos
@@ -21,7 +22,7 @@ Creación de una web recoja información de la api de https://www.api-football.c
 
 # ✒️ Jugadores Favoritos
 
-![image](https://user-images.githubusercontent.com/117438320/217769596-f9276ebc-21e4-43be-8f74-9e97b9cfdfcd.png)
+
 
 
 
