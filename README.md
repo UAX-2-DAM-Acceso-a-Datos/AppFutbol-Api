@@ -18,28 +18,28 @@ Creación de una web recoja información de la api de https://www.api-football.c
 ## 📋 Tareas 
 
 
-#  :soccer: Pantalla Equipos
+#  :soccer: Pantalla Equipos (Aitor)
 
 https://v3.football.api-sports.io/teams?search=%Busqueda%
 
 ![image](https://user-images.githubusercontent.com/117438320/217887522-5e3fdfff-045c-4304-b88b-e78ff0a12400.png)
 
 
-# :office: Pantalla Estadios
+# :office: Pantalla Estadios (Frank)
 
 Uri: https://v3.football.api-sports.io/venues?search=%Busqueda%
 
 ![image](https://user-images.githubusercontent.com/117438320/218028972-286e0baa-6fb1-44b5-bf2f-47a2fed018ca.png)
 
 
-# :mens: Pantalla Jugadores
+# :mens: Pantalla Jugadores (Javi)
 
 Uri: https://v3.football.api-sports.io/players?league=1&search=%Busqueda%
 
 ![image](https://user-images.githubusercontent.com/117438320/218028825-3694e625-03b2-4ea1-aa59-04f8f2540fe3.png)
 
 
-# :notebook_with_decorative_cover: Pantalla Entrenadores
+# :notebook_with_decorative_cover: Pantalla Entrenadores (Marcos)
 
 Uri: https://v3.football.api-sports.io/coachs?search=%Busqueda%
 
