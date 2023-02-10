@@ -29,23 +29,27 @@ https://v3.football.api-sports.io/teams?search=%Busqueda%
 
 Uri: https://v3.football.api-sports.io/venues?search=%Busqueda%
 
-![image](https://user-images.githubusercontent.com/117438320/217879642-e13a4678-98b4-499e-9a55-5ffd9ca1e958.png)
+![image](https://user-images.githubusercontent.com/117438320/218028972-286e0baa-6fb1-44b5-bf2f-47a2fed018ca.png)
 
 
 # :mens: Pantalla Jugadores
 
 Uri: https://v3.football.api-sports.io/players?league=1&search=%Busqueda%
 
-![image](https://user-images.githubusercontent.com/117438320/217884145-5d1e4aa2-fc32-4a6b-86d4-8047415a1577.png)
+![image](https://user-images.githubusercontent.com/117438320/218028825-3694e625-03b2-4ea1-aa59-04f8f2540fe3.png)
+
 
 # :notebook_with_decorative_cover: Pantalla Entrenadores
 
 Uri: https://v3.football.api-sports.io/coachs?search=%Busqueda%
 
-![image](https://user-images.githubusercontent.com/117438320/217883442-2ab625c6-7cbc-4d54-8cfb-89fd475994d4.png)
+![image](https://user-images.githubusercontent.com/117438320/218029508-71e1b1f6-64d8-4a72-832f-729d858f56e3.png)
+
+# :star: Pantalla Favoritos
 
 ## :pineapple: Participantes
 
+Pantalla que reuna los resultados de los entrenadores, futbolistas, estadios y equipos favoritos.
 
 <table>
   <tbody>
