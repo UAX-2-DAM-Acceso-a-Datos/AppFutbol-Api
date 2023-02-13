@@ -1,11 +1,11 @@
-package com.uax.accesodatos.AppFutbolApi.Mapper;
+package com.uax.accesodatos.AppFutbolApi.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.uax.accesodatos.AppFutbolApi.DTO.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
 
 public class EquiposRowMapper implements RowMapper<EquiposDTO>{
 

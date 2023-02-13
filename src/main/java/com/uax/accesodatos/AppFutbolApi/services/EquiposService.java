@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.Services;
+package com.uax.accesodatos.AppFutbolApi.services;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +11,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.jdbc.core.JdbcTemplate;
-import com.uax.accesodatos.AppFutbolApi.DTO.EquiposDTO;
-import com.uax.accesodatos.AppFutbolApi.DTO.EquiposResponseDTO;
 
+import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.EquiposResponseDTO;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 @Service

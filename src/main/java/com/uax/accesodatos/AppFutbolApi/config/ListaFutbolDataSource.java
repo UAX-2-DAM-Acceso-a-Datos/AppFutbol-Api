@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.Config;
+package com.uax.accesodatos.AppFutbolApi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;

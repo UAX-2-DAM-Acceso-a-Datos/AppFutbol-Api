@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.Controller;
+package com.uax.accesodatos.AppFutbolApi.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uax.accesodatos.AppFutbolApi.DTO.EquiposDTO;
-import com.uax.accesodatos.AppFutbolApi.Services.EquiposService;
+import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
 
 @Controller
 public class EquiposController {

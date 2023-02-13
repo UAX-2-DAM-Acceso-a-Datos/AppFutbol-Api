@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.DTO;
+package com.uax.accesodatos.AppFutbolApi.dto;
 
 import java.util.List;
 
