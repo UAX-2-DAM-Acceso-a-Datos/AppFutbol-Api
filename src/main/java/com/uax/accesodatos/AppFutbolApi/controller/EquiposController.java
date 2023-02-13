@@ -17,7 +17,7 @@ public class EquiposController {
 	@Autowired
 	private EquiposService equiposService;
 
-	@GetMapping("/equipos")
+	@GetMapping("/ListaEquipos")
 	public String mostrarEquipos(@RequestParam(name = "busqueda", required = false) String busqueda, Model model) {
 	    List<EquiposDTO> equipos;
 	    if (busqueda != null) {
@@ -26,7 +26,8 @@ public class EquiposController {
 	        equipos = equiposService.findAll();
 	    }
 	    model.addAttribute("equipos", equipos);
-	    return "listaEquipos";
+	    
+	    return "ListaEquipos";
 	}
 
 }
