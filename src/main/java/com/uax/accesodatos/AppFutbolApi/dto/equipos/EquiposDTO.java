@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.dto;
+package com.uax.accesodatos.AppFutbolApi.dto.equipos;
 
 public class EquiposDTO {
 	
