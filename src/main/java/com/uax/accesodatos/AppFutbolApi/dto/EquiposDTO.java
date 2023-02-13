@@ -7,7 +7,6 @@ public class EquiposDTO {
     public String season;
     public String country;
     public String logo;
-    public String urlimage;
     public String venue;
     
 	public EquiposDTO(int id, String name, String season, String country, String logo, String urlimage, String venue) {
@@ -17,7 +16,6 @@ public class EquiposDTO {
 		this.season = season;
 		this.country = country;
 		this.logo = logo;
-		this.urlimage = urlimage;
 		this.venue = venue;
 	}
 
@@ -50,12 +48,6 @@ public class EquiposDTO {
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
-	}
-	public String getUrlimage() {
-		return urlimage;
-	}
-	public void setUrlimage(String urlimage) {
-		this.urlimage = urlimage;
 	}
 	public String getVenue() {
 		return venue;
