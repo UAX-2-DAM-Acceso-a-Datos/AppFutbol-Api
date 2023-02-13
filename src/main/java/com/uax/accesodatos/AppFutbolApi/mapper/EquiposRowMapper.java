@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 
 public class EquiposRowMapper implements RowMapper<EquiposDTO>{
 
