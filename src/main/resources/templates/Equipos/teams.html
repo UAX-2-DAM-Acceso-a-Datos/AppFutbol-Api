@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Lista de equipos</title>
+</head>
+<body>
+	<h1>Lista de equipos</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>País</th>
+				<th>Escudo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="equipo : ${equipos}">
+				<td th:text="${equipo.getName()}"></td>
+				<td th:text="${equipo.getCountry()}"></td>
+				<td><img th:attr="src=${equipo.logo}, alt='Escudo de ' + ${equipo.name}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

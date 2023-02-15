@@ -20,5 +20,6 @@ public class EquiposRepository implements IEquiposRepository {
         List<EquiposDTO> equipos = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(EquiposDTO.class));
         return equipos;
 	}
+	
 
 }

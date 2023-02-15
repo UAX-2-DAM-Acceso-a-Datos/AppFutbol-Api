@@ -1,7 +1,11 @@
 package com.uax.accesodatos.AppFutbolApi.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,12 +28,56 @@ import org.springframework.jdbc.core.RowMapper;
 @Service
 public class EquiposService {
 	
+	@Autowired
+	AppFutbolUtils utils;
 	    
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
     @Autowired
     private RestTemplate restTemplate;
+    
+
+    
+    
+    //convertir de objeto API a DTO
+    
+    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
+    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
+    	
+    	for (Response response : root.getResponse()) {
+    		Team equipo=response.getTeam();
+			EquiposDTO parametros= new EquiposDTO();
+			parametros.setId(equipo.getId());
+			parametros.setLogo(equipo.getLogo());
+			parametros.setName(equipo.getName());
+			parametros.setCountry(equipo.getCountry());
+			
+			
+			equipos.add(parametros);
+		}
+    	
+    	
+    	return equipos;
+    }
+   
+    public ArrayList<EquiposDTO> getEquipos() throws IOException {
+        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+        
+        String jsonResponse = utils.readFile("responseTeams.json");
+
+		Gson gson= new Gson();
+		Root root=gson.fromJson(jsonResponse, Root.class);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+
+        return equipos;
+    }
+
+    //getEquipos()
+    //2 metodos, uno con la conexion con la api, con el root, y root hay que pasarlo al metodo de convertir dto para que de 
+    //root te pase a una arraylist para que te pase a una ArraylistDTO y luego se pasa al controller
+    //Service se encagarga de recuperar toda la información de la API
+    
     public List<EquiposDTO> findAll() {
         String sql = "SELECT * FROM equipos";
         List<EquiposDTO> equipos = jdbcTemplate.query(sql, new RowMapper<EquiposDTO>() {
@@ -46,17 +97,5 @@ public class EquiposService {
         });
         return equipos;
     }
-    public List<EquiposDTO> buscarEquipos(String busqueda) {
-        String url = "https://v3.football.api-sports.io/teams?search=%s" + busqueda;
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-host", "v3.football.api-sports.io");
-        headers.set("x-rapidapi-key", "562a0587497cee9a309f88f5c8bcb789");
 
-        HttpEntity<String> requestEntity = new HttpEntity<>(null, headers);
-        ResponseEntity<EquiposResponseDTO> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, EquiposResponseDTO.class);
-
-        EquiposResponseDTO equiposResponse = responseEntity.getBody();
-        List<EquiposDTO> equipos = equiposResponse.getData();
-        return equipos;
-    }
 }
