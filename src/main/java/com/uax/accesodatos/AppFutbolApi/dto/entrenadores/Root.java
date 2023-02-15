@@ -1,3 +1,7 @@
+package com.uax.accesodatos.AppFutbolApi.dto.entrenadores;
+
+import java.util.ArrayList;
+
 public class Root{
     public String get;
     public Parameters parameters;
