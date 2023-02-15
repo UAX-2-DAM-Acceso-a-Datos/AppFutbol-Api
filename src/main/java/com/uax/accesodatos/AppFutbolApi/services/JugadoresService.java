@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
+import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Service
 public class JugadoresService {
 	
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+	AppFutbolUtils utils;
     
     @Autowired
     private RestTemplate restTemplate;

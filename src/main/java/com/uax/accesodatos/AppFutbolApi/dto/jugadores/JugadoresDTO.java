@@ -1,5 +1,7 @@
 package com.uax.accesodatos.AppFutbolApi.dto.jugadores;
 
+import java.util.List;
+
 public class JugadoresDTO {
 	
 	public int id;
@@ -8,6 +10,7 @@ public class JugadoresDTO {
 	public String nacionalidad;
 	public String urlfoto;
 	public int equipo;
+	private List<JugadoresDTO> data;
 	
 	public JugadoresDTO(int id, String nombre, int edad, String nacionalidad, String urlfoto, int equipo) {
 		super();
@@ -66,6 +69,16 @@ public class JugadoresDTO {
 
 	public void setEquipo(int equipo) {
 		this.equipo = equipo;
+	}
+
+
+	public List<JugadoresDTO> getData() {
+		return data;
+	}
+
+
+	public void setData(List<JugadoresDTO> data) {
+		this.data = data;
 	}
 	
 	
