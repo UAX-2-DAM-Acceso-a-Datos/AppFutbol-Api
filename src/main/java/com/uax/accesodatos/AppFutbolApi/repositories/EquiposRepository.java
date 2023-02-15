@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 
 public class EquiposRepository implements IEquiposRepository {
 

@@ -1,0 +1,204 @@
+{
+    "get": "venues",
+    "parameters": {
+        "search": "Madrid"
+    },
+    "errors": [],
+    "results": 19,
+    "paging": {
+        "current": 1,
+        "total": 1
+    },
+    "response": [
+        {
+            "id": 1456,
+            "name": "Estadio Santiago Bernabéu",
+            "address": "Avenida de Concha Espina 1, Chamartín",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 85454,
+            "surface": "grass",
+            "image": "https://media.api-sports.io/football/venues/1456.png"
+        },
+        {
+            "id": 19217,
+            "name": "Estádio Cívitas Metropolitano",
+            "address": "Rosas",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 68456,
+            "surface": "grass",
+            "image": "https://media-3.api-sports.io/football/venues/19217.png"
+        },
+        {
+            "id": 1488,
+            "name": "Estadio de Vallecas",
+            "address": "Calle Payaso Fofó",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 15500,
+            "surface": "grass",
+            "image": "https://media-3.api-sports.io/football/venues/1488.png"
+        },
+        {
+            "id": 19144,
+            "name": "Polideportivo Dehesa de Navalcarbón 2",
+            "address": "Av. Ntra. Señora del Retamar, Nº 16",
+            "city": "Las Rozas de Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/19144.png"
+        },
+        {
+            "id": 6669,
+            "name": "Estadio Alfredo Di Stéfano",
+            "address": "Ciudad Deportiva del Real Madrid, Valdebebas",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 6500,
+            "surface": "grass",
+            "image": "https://media-3.api-sports.io/football/venues/6669.png"
+        },
+        {
+            "id": 6793,
+            "name": "Polideportivo Santa Ana",
+            "address": "Calle de Afueras a Valverde, Barrio Fuencarral",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 2000,
+            "surface": "grass",
+            "image": "https://media-3.api-sports.io/football/venues/6793.png"
+        },
+        {
+            "id": 6798,
+            "name": "Estadio La Mina de Carabanchel",
+            "address": "Calle Monseñor Oscar Romero 39, Carabanchel",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 6000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/6798.png"
+        },
+        {
+            "id": 6799,
+            "name": "Campo de Fútbol Castroserna",
+            "address": "Calle de Castroserna",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/6799.png"
+        },
+        {
+            "id": 19147,
+            "name": "Ciudad Deportiva Rayo Vallecano Campo 2",
+            "address": "Calle del Rayo Vallecano de Madrid, 2",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/19147.png"
+        },
+        {
+            "id": 6808,
+            "name": "Campo García de la Mata",
+            "address": "Calle Ramírez de Arellano",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 3000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/6808.png"
+        },
+        {
+            "id": 6809,
+            "name": "Estadio Boetticher",
+            "address": "Paseo Talleres 1",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 500,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/6809.png"
+        },
+        {
+            "id": 6982,
+            "name": "Campo de Fútbol Nuevo",
+            "address": null,
+            "city": "Madridejos",
+            "country": "Spain",
+            "capacity": 4000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/6982.png"
+        },
+        {
+            "id": 8149,
+            "name": "Unidad Deportiva Mario Villanueva Madrid",
+            "address": null,
+            "city": "Playa del Carmen",
+            "country": "Mexico",
+            "capacity": 7000,
+            "surface": "grass",
+            "image": "https://media-3.api-sports.io/football/venues/8149.png"
+        },
+        {
+            "id": 12318,
+            "name": "Estadio Galapagar",
+            "address": "C. Guadarrama, 129, Galapagar",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/12318.png"
+        },
+        {
+            "id": 12321,
+            "name": "Estadio Román Valero",
+            "address": "Calle de Andrés Arteaga",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 14000,
+            "surface": "grass",
+            "image": "https://media.api-sports.io/football/venues/12321.png"
+        },
+        {
+            "id": 12323,
+            "name": "Estadio Polideportivo la Dehesa",
+            "address": "Cobeña",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1500,
+            "surface": "artificial turf",
+            "image": "https://media.api-sports.io/football/venues/12323.png"
+        },
+        {
+            "id": 19148,
+            "name": "Estadio Canillas",
+            "address": "Calle Agustín de Iturbide, 1",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/19148.png"
+        },
+        {
+            "id": 19150,
+            "name": "Campo Asociacion Vecinos Orcasitas",
+            "address": "Calle del Camino Viejo de Villaverde",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/19150.png"
+        },
+        {
+            "id": 19295,
+            "name": "Estadio Eustasio Casallo",
+            "address": "Calle Los Yebenes 110",
+            "city": "Madrid",
+            "country": "Spain",
+            "capacity": 1000,
+            "surface": "artificial turf",
+            "image": "https://media-3.api-sports.io/football/venues/19295.png"
+        }
+    ]
+}

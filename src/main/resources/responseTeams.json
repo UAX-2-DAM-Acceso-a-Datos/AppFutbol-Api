@@ -1,0 +1,134 @@
+{
+    "get": "teams",
+    "parameters": {
+        "search": "Murcia"
+    },
+    "errors": [],
+    "results": 6,
+    "paging": {
+        "current": 1,
+        "total": 1
+    },
+    "response": [
+        {
+            "team": {
+                "id": 800,
+                "name": "Ucam Murcia",
+                "code": null,
+                "country": "Spain",
+                "founded": 2009,
+                "national": false,
+                "logo": "https://media-3.api-sports.io/football/teams/800.png"
+            },
+            "venue": {
+                "id": 2921,
+                "name": "Estadio de La Condomina",
+                "address": "Ronda de Garay 14",
+                "city": "Murcia",
+                "capacity": 13500,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/2921.png"
+            }
+        },
+        {
+            "team": {
+                "id": 5275,
+                "name": "Real Murcia",
+                "code": "MUR",
+                "country": "Spain",
+                "founded": 1908,
+                "national": false,
+                "logo": "https://media-3.api-sports.io/football/teams/5275.png"
+            },
+            "venue": {
+                "id": 3989,
+                "name": "Estadio Enrique Roca de Murcia",
+                "address": "Ronda de Garay 14",
+                "city": "Murcia",
+                "capacity": 31179,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/3989.png"
+            }
+        },
+        {
+            "team": {
+                "id": 9809,
+                "name": "CAP Ciudad de Murcia",
+                "code": null,
+                "country": "Spain",
+                "founded": 2010,
+                "national": false,
+                "logo": "https://media-3.api-sports.io/football/teams/9809.png"
+            },
+            "venue": {
+                "id": 6890,
+                "name": "Estadio José Barnés",
+                "address": "Calle Mar Menor",
+                "city": "Murcia",
+                "capacity": 1500,
+                "surface": "artificial turf",
+                "image": "https://media.api-sports.io/football/venues/6890.png"
+            }
+        },
+        {
+            "team": {
+                "id": 9820,
+                "name": "Real Murcia II",
+                "code": null,
+                "country": "Spain",
+                "founded": 1908,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/9820.png"
+            },
+            "venue": {
+                "id": 6900,
+                "name": "Estadio Campus Universitario",
+                "address": "Calle Campus Universitario, 18",
+                "city": "Murcia",
+                "capacity": 5000,
+                "surface": "artificial turf",
+                "image": "https://media.api-sports.io/football/venues/6900.png"
+            }
+        },
+        {
+            "team": {
+                "id": 9822,
+                "name": "UCAM Murcia II",
+                "code": null,
+                "country": "Spain",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/9822.png"
+            },
+            "venue": {
+                "id": 6902,
+                "name": "Estadio El Mayayo",
+                "address": "Carril El Mayayo",
+                "city": "Sangonera la Verde",
+                "capacity": 1200,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/6902.png"
+            }
+        },
+        {
+            "team": {
+                "id": 15317,
+                "name": "Racing Murcia",
+                "code": null,
+                "country": "Spain",
+                "founded": 1913,
+                "national": false,
+                "logo": "https://media-3.api-sports.io/football/teams/15317.png"
+            },
+            "venue": {
+                "id": 10981,
+                "name": "Polideportivo Municipal Virgen del Pasico",
+                "address": "Av. Roldan, s/n",
+                "city": "Murcia",
+                "capacity": 1000,
+                "surface": "artificial turf",
+                "image": "https://media.api-sports.io/football/venues/10981.png"
+            }
+        }
+    ]
+}

@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.uax.accesodatos.AppFutbolApi.dto.EquiposDTO;
-import com.uax.accesodatos.AppFutbolApi.dto.EquiposResponseDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
