@@ -33,42 +33,41 @@
   </div>
 </nav>
 <div class="container">
-  <h1>Búsqueda de jugadores</h1>
 
-  <form method="GET" action="/jugadores">
-    <div class="form-group">
-      <input type="text" class="form-control" id="searchQuery" name="query" placeholder="Búsqueda de jugadores">
-    </div>
+  <form class="d-flex mb-4 mt-4" method="GET" action="/jugadores">
+    <input type="text" class="form-control mr-3" id="searchQuery" name="query" placeholder="Búsqueda de jugadores">
     <button type="submit" class="btn btn-primary">Buscar</button>
-    
   </form>
 
-  <table class="table">
-    <!-- ... -->
-  </table>
 </div>
 	<div class="container">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Logo</th>
-					<th>Nombre</th>
-					<th>Edad</th>
-					<th>Nacionalidad</th>
-					<th>Equipo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- Ciclo para mostrar los datos -->
-				<!-- Se asume que los datos de EquiposDTO están en una lista llamada "jugadores" -->
-				<tr th:each="jugador : ${jugadores}">
-					<td><img th:attr="src=${jugador.urlfoto}"></td>
-					<td th:text="${jugador.nombre}"></td>
-					<td th:text="${jugador.edad}"></td>
-					<td th:text="${jugador.nacionalidad}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<div>
+			<caption>Listado de jugadores</caption>
+			<table class="table caption-top table-striped table-bordered table-sm ">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Nombre</th>
+						<th>Edad</th>
+						<th>Nacionalidad</th>
+						<th>Equipo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Ciclo para mostrar los datos -->
+					<!-- Se asume que los datos de JugadoresDTO están en una lista llamada "jugadores" -->
+					<tr th:each="jugador : ${jugadores}">
+						<td class="pl-5"><img th:attr="src=${jugador.urlfoto}" class="img-fluid w-25"></td>
+						<td th:text="${jugador.nombre}"></td>
+						<td th:text="${jugador.edad}"></td>
+						<td th:text="${jugador.nacionalidad}"></td>
+						<td th:text="${jugador.equipo}"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
 	</div>
 
 	<!-- Carga de scripts de Bootstrap -->
