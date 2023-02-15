@@ -91,6 +91,7 @@ public class EquiposService {
                     rs.getString("logo"),
                     rs.getString("urlimage"),
                     rs.getString("venue")
+                    
                 );
                 return equipo;
             }

@@ -18,10 +18,10 @@
         <a class="nav-link" href="/">Inicio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Equipos</a>
+        <a class="nav-link" href="/go-to-Equipos">Equipos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Jugadores</a>
+        <a class="nav-link" href="/go-to-Jugadores">Jugadores</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Estadios</a>
@@ -37,9 +37,10 @@
 
   <form method="GET" action="/jugadores">
     <div class="form-group">
-      <input type="text" class="form-control" id="searchQuery" name="query" placeholder="Búsqueda de equipo por país">
+      <input type="text" class="form-control" id="searchQuery" name="query" placeholder="Búsqueda de jugadores">
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
+    
   </form>
 
   <table class="table">
@@ -52,23 +53,20 @@
 				<tr>
 					<th>Logo</th>
 					<th>Nombre</th>
-					<th>Temporada</th>
-					<th>País</th>
-					<th>Estadio</th>
+					<th>Edad</th>
+					<th>Nacionalidad</th>
+					<th>Equipo</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- Ciclo para mostrar los datos -->
 				<!-- Se asume que los datos de EquiposDTO están en una lista llamada "jugadores" -->
-				<c:forEach items="${equipos}" var="equipo">
-					<tr>
-						<td><img src="${equipo.logo}" alt="${equipo.name}" width="50"></td>
-						<td>${equipo.name}</td>
-						<td>${equipo.season}</td>
-						<td>${equipo.country}</td>
-						<td>${equipo.venue}</td>
-					</tr>
-				</c:forEach>
+				<tr th:each="jugador : ${jugadores}">
+					<td><img th:attr="src=${jugador.urlfoto}"></td>
+					<td th:text="${jugador.nombre}"></td>
+					<td th:text="${jugador.edad}"></td>
+					<td th:text="${jugador.nacionalidad}"></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
