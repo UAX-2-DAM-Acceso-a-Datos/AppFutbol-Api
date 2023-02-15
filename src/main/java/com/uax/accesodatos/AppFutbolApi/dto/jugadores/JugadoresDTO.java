@@ -12,6 +12,11 @@ public class JugadoresDTO {
 	public int equipo;
 	private List<JugadoresDTO> data;
 	
+
+	public JugadoresDTO() {
+		super();
+	}
+
 	public JugadoresDTO(int id, String nombre, int edad, String nacionalidad, String urlfoto, int equipo) {
 		super();
 		this.id = id;
@@ -75,7 +80,6 @@ public class JugadoresDTO {
 	public List<JugadoresDTO> getData() {
 		return data;
 	}
-
 
 	public void setData(List<JugadoresDTO> data) {
 		this.data = data;
