@@ -26,5 +26,11 @@ public class JugadoresController {
         return "Jugadores/ListaJugadores";
     }
 	
+    @GetMapping("/go-to-Favoritos")
+    public String showListaJugadoresFavoritos(Model model) throws IOException {
+    	
+    	
+        return "Favoritos/ListaFavoritos";
+    }
 	
 }
