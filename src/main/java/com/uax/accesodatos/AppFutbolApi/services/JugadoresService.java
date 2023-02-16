@@ -64,12 +64,18 @@ public class JugadoresService {
     }
     
     
-    
 	public boolean addJugadoresFavoritos(JugadoresDTO jugador){
 		
 		jugadoresrepository.saveJugador(jugador);
 		
 		return true;
+	}
+	
+	public List<JugadoresDTO> getListaFavoritos() throws IOException{
+		
+		return jugadoresrepository.getAllJugadores();
+		
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package com.uax.accesodatos.AppFutbolApi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class FavoritosController {
     @GetMapping("/go-to-Favoritos")
     public String showListaJugadoresFavoritos(Model model) throws IOException {
     	
+    	List<JugadoresDTO> jugadores = jugadoresService.getListaFavoritos();
+    	model.addAttribute("jugadoresfav",jugadores);
     	
     	
         return "Favoritos/ListaFavoritos";

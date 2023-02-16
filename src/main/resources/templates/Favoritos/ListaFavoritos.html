@@ -33,6 +33,13 @@
   </div>
 </nav>
 
+  <tbody>
+	  <div th:each="jugadorfav : ${jugadoresfav}">
+		<h5 th:text="${jugadorfav.nombre}"></h5>
+		
+	  </div>
+  </tbody>
+
 
 	<!-- Carga de scripts de Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
