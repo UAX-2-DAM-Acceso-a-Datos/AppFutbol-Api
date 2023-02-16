@@ -12,19 +12,17 @@ import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.JugadoresService;
 
 @Controller
-public class JugadoresController {
+public class FavoritosController {
 	
     @Autowired
     private JugadoresService jugadoresService;
-
-    @GetMapping("/go-to-Jugadores")
-    public String showListaJugadores(Model model) throws IOException {
+	
+    @GetMapping("/go-to-Favoritos")
+    public String showListaJugadoresFavoritos(Model model) throws IOException {
     	
-	    ArrayList<JugadoresDTO> jugadores = jugadoresService.getJugadores();
-	    model.addAttribute("jugadores", jugadores);
     	
-        return "Jugadores/ListaJugadores";
+    	
+        return "Favoritos/ListaFavoritos";
     }
-	
-	
+
 }
