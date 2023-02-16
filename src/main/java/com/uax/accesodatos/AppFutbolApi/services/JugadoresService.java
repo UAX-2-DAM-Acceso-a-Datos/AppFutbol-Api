@@ -17,6 +17,7 @@ import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Player;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Response;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Root;
+import com.uax.accesodatos.AppFutbolApi.repositories.JugadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Service
@@ -27,6 +28,9 @@ public class JugadoresService {
     
     @Autowired
 	AppFutbolUtils utils;
+    
+    @Autowired
+    JugadoresRepository jugadoresrepository;
     
     
     public List<JugadoresDTO> convertirObjetoApitoDTO(Root root) {
@@ -58,5 +62,14 @@ public class JugadoresService {
 
         return jugadores;
     }
+    
+    
+    
+	public boolean addJugadoresFavoritos(JugadoresDTO jugador){
+		
+		jugadoresrepository.saveJugador(jugador);
+		
+		return true;
+	}
 
 }

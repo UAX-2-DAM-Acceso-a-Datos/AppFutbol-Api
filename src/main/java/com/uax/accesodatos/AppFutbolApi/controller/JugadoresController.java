@@ -30,6 +30,7 @@ public class JugadoresController {
     public String showListaJugadoresFavoritos(Model model) throws IOException {
     	
     	
+    	
         return "Favoritos/ListaFavoritos";
     }
 	
