@@ -1,5 +1,7 @@
 package com.uax.accesodatos.AppFutbolApi.dto.equipos;
 
+import java.util.List;
+
 public class EquiposDTO {
 	
 	public int id;
@@ -8,7 +10,12 @@ public class EquiposDTO {
     public String country;
     public String logo;
     public String venue;
-    
+	private List<EquiposDTO> data;
+	
+	public EquiposDTO() {
+		super();
+	}
+
 	public EquiposDTO(int id, String name, String season, String country, String logo, String urlimage, String venue) {
 		super();
 		this.id = id;
@@ -54,6 +61,13 @@ public class EquiposDTO {
 	}
 	public void setVenue(String venue) {
 		this.venue = venue;
+	}
+	
+	public List<EquiposDTO> getData() {
+		return getData();
+	}
+	public void setData(List<EquiposDTO> data) {
+		this.data = data;
 	}
 
 }
