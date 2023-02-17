@@ -76,10 +76,6 @@ public class EquiposService {
         return equipos;
     }
 
-    //getEquipos()
-    //2 metodos, uno con la conexion con la api, con el root, y root hay que pasarlo al metodo de convertir dto para que de 
-    //root te pase a una arraylist para que te pase a una ArraylistDTO y luego se pasa al controller
-    //Service se encagarga de recuperar toda la información de la API
     
     public List<EquiposDTO> findAll() {
     	
