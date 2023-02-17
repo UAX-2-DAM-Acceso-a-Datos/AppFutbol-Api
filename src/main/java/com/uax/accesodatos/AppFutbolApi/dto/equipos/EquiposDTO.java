@@ -1,73 +1,67 @@
 package com.uax.accesodatos.AppFutbolApi.dto.equipos;
 
-import java.util.List;
 
 public class EquiposDTO {
-	
 	public int id;
-    public String name;
-    public String season;
-    public String country;
-    public String logo;
-    public String venue;
-	private List<EquiposDTO> data;
+    public String nombre;
+    public String pais;
+    public String urlfoto;
+    public String estadio;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getUrlfoto() {
+		return urlfoto;
+	}
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
+	}
+
+	public String getEstadio() {
+		return estadio;
+	}
+
+	public void setEstadio(String estadio) {
+		this.estadio = estadio;
+	}
+
+
 	public EquiposDTO() {
 		super();
 	}
 
-	public EquiposDTO(int id, String name, String season, String country, String logo, String urlimage, String venue) {
+	public EquiposDTO(int id, String nombre, String pais, String urlfoto, String estadio) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.season = season;
-		this.country = country;
-		this.logo = logo;
-		this.venue = venue;
+		this.nombre = nombre;
+		this.pais = pais;
+		this.urlfoto = urlfoto;
+		this.estadio = estadio;
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSeason() {
-		return season;
-	}
-	public void setSeason(String season) {
-		this.season = season;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	public String getLogo() {
-		return logo;
-	}
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-	public String getVenue() {
-		return venue;
-	}
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
-	
-	public List<EquiposDTO> getData() {
-		return getData();
-	}
-	public void setData(List<EquiposDTO> data) {
-		this.data = data;
-	}
+
+
 
 }

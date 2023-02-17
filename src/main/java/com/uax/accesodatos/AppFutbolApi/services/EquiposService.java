@@ -19,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.repositories.EquiposRepository;
+import com.uax.accesodatos.AppFutbolApi.repositories.JugadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 
@@ -37,7 +39,8 @@ public class EquiposService {
     @Autowired
     private RestTemplate restTemplate;
     
-
+    @Autowired
+    EquiposRepository equiposrepository;
     
     
     //convertir de objeto API a DTO
@@ -49,9 +52,9 @@ public class EquiposService {
     		Team equipo=response.getTeam();
 			EquiposDTO parametros= new EquiposDTO();
 			parametros.setId(equipo.getId());
-			parametros.setLogo(equipo.getLogo());
-			parametros.setName(equipo.getName());
-			parametros.setCountry(equipo.getCountry());
+			parametros.setUrlfoto(equipo.getLogo());
+			parametros.setNombre(equipo.getName());
+			parametros.setPais(equipo.getCountry());
 			
 			
 			equipos.add(parametros);
@@ -79,24 +82,9 @@ public class EquiposService {
     //Service se encagarga de recuperar toda la información de la API
     
     public List<EquiposDTO> findAll() {
-        String sql = "SELECT * FROM equipos";
-        List<EquiposDTO> equipos = jdbcTemplate.query(sql, new RowMapper<EquiposDTO>() {
-            @Override
-            public EquiposDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-                EquiposDTO equipo = new EquiposDTO(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("season"),
-                    rs.getString("country"),
-                    rs.getString("logo"),
-                    rs.getString("urlimage"),
-                    rs.getString("venue")
-                    
-                );
-                return equipo;
-            }
-        });
-        return equipos;
+    	
+        return equiposrepository.findAll();
+        
     }
 
 }
