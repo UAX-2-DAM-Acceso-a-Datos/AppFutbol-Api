@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
+import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
 import com.uax.accesodatos.AppFutbolApi.services.JugadoresService;
 
 @Controller
@@ -17,6 +19,9 @@ public class FavoritosController {
 	
     @Autowired
     private JugadoresService jugadoresService;
+    
+    @Autowired
+    private EquiposService equiposService;
 	
     @GetMapping("/go-to-Favoritos")
     public String showListaJugadoresFavoritos(Model model) throws IOException {
@@ -24,8 +29,12 @@ public class FavoritosController {
     	List<JugadoresDTO> jugadores = jugadoresService.getListaFavoritos();
     	model.addAttribute("jugadoresfav",jugadores);
     	
+    	ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
+    	model.addAttribute("equiposfav",equipos);
+    	
     	
         return "Favoritos/ListaFavoritos";
     }
 
+    	
 }

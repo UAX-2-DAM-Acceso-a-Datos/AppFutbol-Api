@@ -39,6 +39,13 @@
 		
 	  </div>
   </tbody>
+  <!-- Equipos -->
+   <tbody>
+	  <div th:each="equiposfav : ${equiposfav}">
+		<h5 th:text="${equiposfav.pais}"></h5>
+		
+	  </div>
+  </tbody>
 
 
 	<!-- Carga de scripts de Bootstrap -->
