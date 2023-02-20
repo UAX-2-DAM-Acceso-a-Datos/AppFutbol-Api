@@ -2,6 +2,8 @@ package com.uax.accesodatos.AppFutbolApi.dto;
 
 import java.util.List;
 
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
+
 public class EntrenadoresDTO {
 	
 	public int id;
@@ -12,6 +14,13 @@ public class EntrenadoresDTO {
     public int idTeam;
     
     
+    
+    
+	public EntrenadoresDTO() {
+		super();
+	}
+
+
 	public EntrenadoresDTO(int id, String name, String age, String country, String urlimage, int idTeam) {
 		super();
 		this.id = id;
@@ -58,5 +67,15 @@ public class EntrenadoresDTO {
 	}
 	public void setIdTeam(int idTeam) {
 		this.idTeam = idTeam;
+	}
+
+
+	public List<EquiposDTO> getData() {
+		return null;
+	}
+
+
+	public List<EquiposDTO> buscarEntrenadores(String busqueda) {
+		return null;
 	}    
 }

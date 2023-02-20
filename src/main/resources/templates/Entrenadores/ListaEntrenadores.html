@@ -55,22 +55,21 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Edad</th>
-					<th>Nacionalidad</th>
-					<th>UrlFoto</th>
-					<th>Equipo</th>
+					<th>País</th>
+					<th>urlimagen</th>
+					<th>idTeam</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- Ciclo para mostrar los datos -->
-				<!-- Se asume que los datos de EntrenadoresDTO están en una lista llamada "entrenadores" -->
-				<c:forEach items="${entrenadores}" var="entrenadores">
-					<tr>
-						<td><img src="${equipo.logo}" alt="${entrenadores.name}" width="50"></td>
-						<td>${entrenadores.name}</td>
-						<td>${entrenadores.age}</td>
-						<td>${entrenadores.country}</td>
-						<td>${entrenadores.urlimage}</td>
-					</tr>
+				<!-- Se asume que los datos de EquiposDTO están en una lista llamada "equipos" -->
+				<tr th:each="entrenador : ${entrenadores}">
+				<td th:text="${entrenador.getName()}"></td>
+				<td th:text="${entrenador.getAge()}"></td>
+				<td th:text="${entrenador.getCountry()}"></td>
+				<td th:text="${entrenador.getIdTeam()}"></td>
+				<td><img th:attr="src=${entrenador.urlimage}, alt='Entrenador de ' + ${entrenador.name}"></td>
+				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
