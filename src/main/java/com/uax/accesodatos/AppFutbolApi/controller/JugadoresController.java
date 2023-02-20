@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.JugadoresService;
@@ -26,14 +27,15 @@ public class JugadoresController {
         return "Jugadores/ListaJugadores";
     }
     
-    @GetMapping("/add-jugadores")
-    public String addJugadores(Model model) throws IOException {
+    @GetMapping("/add-jugadores-favoritos")
+    public String addJugadores(@RequestParam("idJugador") int idJugador, @RequestParam("nombreJugador") String nombreJugador, @RequestParam("edadJugador") int edadJugador, 
+    @RequestParam("nacJugador") String nacJugador, @RequestParam("fotoJugador") String fotoJugador,  @RequestParam("equipo") int equipo) throws IOException {
     	
+    	JugadoresDTO jugador = new JugadoresDTO(idJugador, nombreJugador, edadJugador,nacJugador,fotoJugador,equipo);
     	
+    	jugadoresService.addJugadoresFavoritos(jugador);
     	
-    	jugadoresService.addJugadoresFavoritos(null);
-    	
-        return "Jugadores/ListaJugadores";
+        return "redirect:/go-to-Favoritos";
     }
 	
 	

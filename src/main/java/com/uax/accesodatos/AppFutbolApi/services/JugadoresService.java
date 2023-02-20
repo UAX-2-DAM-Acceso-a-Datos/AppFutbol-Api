@@ -32,6 +32,8 @@ public class JugadoresService {
     @Autowired
     JugadoresRepository jugadoresrepository;
     
+	private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
+    
     
     public List<JugadoresDTO> convertirObjetoApitoDTO(Root root) {
         ArrayList<JugadoresDTO> jugadores = new ArrayList<JugadoresDTO>();

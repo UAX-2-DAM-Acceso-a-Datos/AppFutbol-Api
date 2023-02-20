@@ -19,7 +19,7 @@ public class JugadoresRepository implements IJugadoresRepository{
 	public boolean saveJugador(JugadoresDTO jugadores) {
 		try {
 			
-			String sql = String.format("INSERT INTO jugadores (id,nombre,edad,nacionalidad, urlfoto, equipo) VALUES('%d','%s','%d','%s','%s','%s')", jugadores.getId(), jugadores.getNombre(), jugadores.getEdad(), jugadores.getNacionalidad(), jugadores.getUrlfoto(), jugadores.getEquipo());
+			String sql = String.format("INSERT INTO jugadores (id,nombre,edad,nacionalidad, urlfoto, equipo) VALUES('%d','%s','%d','%s','%s','%d')", jugadores.getId(), jugadores.getNombre(), jugadores.getEdad(), jugadores.getNacionalidad(), jugadores.getUrlfoto(), jugadores.getEquipo());
 			jdbctemplate.execute(sql);
 			
 		} catch (Exception e) {
