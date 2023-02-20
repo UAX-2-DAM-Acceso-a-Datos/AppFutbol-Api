@@ -25,6 +25,16 @@ public class JugadoresController {
     	
         return "Jugadores/ListaJugadores";
     }
+    
+    @GetMapping("/add-jugadores")
+    public String addJugadores(Model model) throws IOException {
+    	
+    	
+    	
+    	jugadoresService.addJugadoresFavoritos(null);
+    	
+        return "Jugadores/ListaJugadores";
+    }
 	
 	
 }

@@ -55,11 +55,11 @@ public class JugadoresService {
         ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
         
         String jsonResponse = utils.readFile("responsePlayers.json");
-
+        
 		Gson gson= new Gson();
 		Root root=gson.fromJson(jsonResponse, Root.class);
         jugadores = (ArrayList<JugadoresDTO>) convertirObjetoApitoDTO(root);
-
+        
         return jugadores;
     }
     
