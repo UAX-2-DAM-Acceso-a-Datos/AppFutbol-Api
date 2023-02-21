@@ -1,0 +1,59 @@
+.navbar {
+    background-color: #FFE116;
+    overflow: hidden;
+}
+.navbar-title h2 {
+  color: #212227;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+body {
+    background-color: #212227;
+}
+.btn {
+    background-color: #FFE116 !important;
+    color: #000000;
+}
+.btn:hover {
+	background-color: #EA5522 !important;
+    border: 1px solid #212227;
+    box-shadow: 0px 0px 5px #212227;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #FFE116;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.table {
+  background-color: #212227;
+  color: #fff;
+  border: none;
+}
+
+.table th {
+  background-color: #FFE116;
+  color: #212227;
+}
+
+.table td {
+  border: none;
+}
+
+

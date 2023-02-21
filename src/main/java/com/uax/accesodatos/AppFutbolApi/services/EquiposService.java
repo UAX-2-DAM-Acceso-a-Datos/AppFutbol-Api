@@ -42,6 +42,7 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
+    private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
     
     //convertir de objeto API a DTO
     
@@ -60,7 +61,6 @@ public class EquiposService {
 			equipos.add(parametros);
 		}
     	
-    	
     	return equipos;
     }
    
@@ -76,11 +76,31 @@ public class EquiposService {
         return equipos;
     }
 
-    
     public List<EquiposDTO> findAll() {
     	
         return equiposrepository.findAll();
         
     }
+
+	public boolean addEquiposFavoritos(EquiposDTO equipo){
+		
+		equiposrepository.saveEquipo(equipo);
+		
+		return true;
+	}
+	
+	public boolean deleteEquiposFavoritos(int id){
+		
+		equiposrepository.deleteEquipo(id);
+		
+		return true;
+	}
+	
+	public List<EquiposDTO> getListaFavoritos() throws IOException{
+		
+		return equiposrepository.findAll();
+		
+		
+	}
 
 }
