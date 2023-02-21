@@ -73,12 +73,31 @@
 
   </tbody>
   <!-- Equipos -->
-   <tbody>
-	  <div th:each="equiposfav : ${equiposfav}">
-		<h5 th:text="${equiposfav.pais}"></h5>
-		
-	  </div>
-  </tbody>
+ <div class="container mt-4">
+	<div class="table-responsive">
+		<div>
+			<caption>Listado de equipos favoritos</caption>
+			<table class="table caption-top table-striped table-bordered table-sm ">
+				<thead>
+					<tr>
+						<th>Foto</th>
+						<th>Nombre</th>
+						<th>País</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Ciclo para mostrar los datos -->
+					<!-- Se asume que los datos de EquiposDTO están en una lista llamada "equiposfav" -->
+					<tr th:each="equipofav : ${equiposfav}">
+						<td class="pl-5"><img th:attr="src=${equipofav.urlfoto}" class="img-fluid w-25"></td>
+						<td th:text="${equipofav.nombre}"></td>
+						<td th:text="${equipofav.pais}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
 
 	<!-- Carga de scripts de Bootstrap -->

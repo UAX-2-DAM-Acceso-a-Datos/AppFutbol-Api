@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -42,38 +43,21 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
-    private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
+    private final String urlEquiposApi = "https://v3.football.api-sports.io/teams?id=?";
     
-    //convertir de objeto API a DTO
-    
-    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
-    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
-    	
-    	for (Response response : root.getResponse()) {
-    		Team equipo=response.getTeam();
-			EquiposDTO parametros= new EquiposDTO();
-			parametros.setId(equipo.getId());
-			parametros.setUrlfoto(equipo.getLogo());
-			parametros.setNombre(equipo.getName());
-			parametros.setPais(equipo.getCountry());
-			
-			
-			equipos.add(parametros);
-		}
-    	
-    	return equipos;
-    }
-   
-    public ArrayList<EquiposDTO> getEquipos() throws IOException {
-        ArrayList<EquiposDTO> equipos = new ArrayList<>();
-        
-        String jsonResponse = utils.readFile("responseTeams.json");
+    //Obtener Equipos desde la API
+    public EquiposResponseDTO getEquiposFromApi() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("x-rapidapi-host", "v3.football.api-sports.io");
+        headers.set("x-rapidapi-key","ae76f089a66a76dafc4e958eab705477");
 
-		Gson gson= new Gson();
-		Root root=gson.fromJson(jsonResponse, Root.class);
-        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        String urlEquiposApi = "https://v3.football.api-sports.io/teams";
 
-        return equipos;
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<EquiposResponseDTO> response = restTemplate.exchange(urlEquiposApi, HttpMethod.GET, entity, EquiposResponseDTO.class);
+
+        return response.getBody();
     }
 
     public List<EquiposDTO> findAll() {
@@ -102,5 +86,40 @@ public class EquiposService {
 		
 		
 	}
+    
+    
+//    //convertir de objeto API a DTO
+//    
+//    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
+//    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
+//    	
+//    	for (Response response : root.getResponse()) {
+//    		Team equipo=response.getTeam();
+//			EquiposDTO parametros= new EquiposDTO();
+//			parametros.setId(equipo.getId());
+//			parametros.setUrlfoto(equipo.getLogo());
+//			parametros.setNombre(equipo.getName());
+//			parametros.setPais(equipo.getCountry());
+//			
+//			
+//			equipos.add(parametros);
+//		}
+//    	
+//    	return equipos;
+//    }
+//   
+//    public ArrayList<EquiposDTO> getEquipos() throws IOException {
+//        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+//        
+//        String jsonResponse = utils.readFile("responseTeams.json");
+//
+//		Gson gson= new Gson();
+//		Root root=gson.fromJson(jsonResponse, Root.class);
+//        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+//
+//        return equipos;
+//    }
+
+
 
 }

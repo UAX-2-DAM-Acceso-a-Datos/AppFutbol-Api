@@ -30,7 +30,7 @@ public class FavoritosController {
     	List<JugadoresDTO> jugadores = jugadoresService.getListaFavoritos();
     	model.addAttribute("jugadoresfav",jugadores);
     	
-    	ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
+    	ArrayList<EquiposDTO> equipos = (ArrayList<EquiposDTO>) equiposService.findAll();
     	model.addAttribute("equiposfav",equipos);
     	
     	

@@ -3,6 +3,7 @@ package com.uax.accesodatos.AppFutbolApi.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -33,46 +35,51 @@ public class EquiposController {
     @Autowired
     private EquiposService equiposService;
 
+    
     @GetMapping("/go-to-Equipos")
     public String showListaEquipos(Model model) throws IOException {
-    	
-		
-	    ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
-	    model.addAttribute("equipos", equipos);
-    	
-        return "Equipos/ListaEquipos";
-    } 
-    
-    //Funcionalidad del boton de insertar en base de datos
-    @GetMapping("add-equipos-favoritos")
-    public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
-                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto,
-                              @RequestParam("estadio") String estadio) {
-        EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
-        equiposService.addEquiposFavoritos(equipo);
-        return "redirect:/go-to-favoritos";
-    }
-
-    //Insertar datos desde JSON
-    @PostMapping("/insertar-equipos-desde-json")
-    public String insertarEquiposDesdeJson(@RequestParam("jsonFile") MultipartFile jsonFile) {
-        try {
-            // Obtener el contenido del archivo JSON en forma de String
-            String jsonContent = new String(jsonFile.getBytes());
-
-            // Convertir el contenido del archivo JSON a una lista de objetos EquiposDTO utilizando Jackson
-            ObjectMapper mapper = new ObjectMapper();
-            List<EquiposDTO> equipos = mapper.readValue(jsonContent, new TypeReference<List<EquiposDTO>>(){});
-
-            // Insertar la lista de objetos EquiposDTO en la base de datos utilizando el servicio EquiposService
-            equiposService.getEquipos();
-           
-            return "redirect:/go-to-Equipos";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error-page";
+        EquiposResponseDTO equiposResponseDTO = equiposService.getEquiposFromApi();
+        List<Response> response = equiposResponseDTO.getResponse();
+        List<EquiposDTO> equipos = new ArrayList<>();
+        for (Response equipo : response) {
+            EquiposDTO equiposDTO = new EquiposDTO();
+            equiposDTO.setNombre(equipo.getTeam().getName());
+            equiposDTO.setPais(equipo.getTeam().getCountry());
+            equiposDTO.setUrlfoto(equipo.getTeam().getLogo());
+            equipos.add(equiposDTO);
         }
+        model.addAttribute("equipos", equipos);
+        return "Equipos/ListaEquipos";
     }
+
+
+    
+    //Buscador con API por pais
+    
+    @GetMapping("/equipos")
+    public ModelAndView equipos(@RequestParam(name = "query", required = false) String query) {
+        ModelAndView modelAndView = new ModelAndView("Equipos/ListaEquipos");
+        List<EquiposDTO> equipos;
+        if (query != null && !query.isEmpty()) {
+            EquiposResponseDTO equiposResponseDTO = equiposService.getEquiposFromApi();
+            List<Response> response = equiposResponseDTO.getResponse();
+            equipos = new ArrayList<>();
+            for (Response equipo : response) {
+                EquiposDTO equiposDTO = new EquiposDTO();
+                equiposDTO.setNombre(equipo.getTeam().getName());
+                equiposDTO.setPais(equipo.getTeam().getCountry());
+                equiposDTO.setUrlfoto(equipo.getTeam().getLogo());
+                equipos.add(equiposDTO);
+            }
+            equipos = equipos.stream().filter(equipo -> equipo.getPais().equalsIgnoreCase(query)).collect(Collectors.toList());
+        } else {
+            equipos = equiposService.findAll();
+        }
+        modelAndView.addObject("equipos", equipos);
+        return modelAndView;
+    }
+
+
     
 
 }

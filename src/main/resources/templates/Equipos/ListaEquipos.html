@@ -55,7 +55,7 @@
       <input type="text" class="form-control" id="searchQuery" name="query" placeholder="Búsqueda de equipo por país">
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
-  </form>
+
 </div>
 	<div class="container">
 		<table class="table">
@@ -70,8 +70,7 @@
     <!-- Ciclo para mostrar los datos -->
     <!-- Se asume que los datos de EquiposDTO están en una lista llamada "equipos" -->
     <tr th:each="equipo : ${equipos}">
-        <td><img th:attr="src=${equipo.urlfoto}, alt='Escudo de ' + ${equipo.nombre}">
-        </td>
+        <td><img th:src="${equipo.urlLogo}" th:alt="Escudo de [(${equipo.nombre})]"></td>
         <td th:text="${equipo.nombre}"></td>
         <td th:text="${equipo.pais}"></td>
         <td>
@@ -83,7 +82,9 @@
         </td>
     </tr>
 </tbody>
+
 		</table>
+		  </form>
 	</div>
 
 	<!-- Carga de scripts de Bootstrap -->
