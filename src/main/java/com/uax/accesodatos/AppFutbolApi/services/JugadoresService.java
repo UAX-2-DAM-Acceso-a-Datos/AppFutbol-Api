@@ -73,6 +73,13 @@ public class JugadoresService {
 		return true;
 	}
 	
+	public boolean deleteJugadoresFavoritos(int id){
+		
+		jugadoresrepository.deleteJugador(id);
+		
+		return true;
+	}
+	
 	public List<JugadoresDTO> getListaFavoritos() throws IOException{
 		
 		return jugadoresrepository.getAllJugadores();

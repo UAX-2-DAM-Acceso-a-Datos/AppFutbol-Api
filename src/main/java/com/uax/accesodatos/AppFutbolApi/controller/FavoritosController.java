@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
@@ -35,6 +36,14 @@ public class FavoritosController {
     	
         return "Favoritos/ListaFavoritos";
     }
+    
+	@GetMapping("/delete-jugador")
+	public String deleteProductoById(@RequestParam("idJugador") int idJugador) {
+		
+		jugadoresService.deleteJugadoresFavoritos(idJugador);
+
+		return "redirect:/go-to-Favoritos";
+	}
 
     	
 }
