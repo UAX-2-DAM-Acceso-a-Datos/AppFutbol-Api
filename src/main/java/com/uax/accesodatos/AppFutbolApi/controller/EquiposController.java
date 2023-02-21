@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -40,22 +42,37 @@ public class EquiposController {
     	
         return "Equipos/ListaEquipos";
     } 
+    
+    //Funcionalidad del boton de insertar en base de datos
+    @GetMapping("add-equipos-favoritos")
+    public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
+                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto,
+                              @RequestParam("estadio") String estadio) {
+        EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
+        equiposService.addEquiposFavoritos(equipo);
+        return "redirect:/go-to-favoritos";
+    }
+
+    //Insertar datos desde JSON
+    @PostMapping("/insertar-equipos-desde-json")
+    public String insertarEquiposDesdeJson(@RequestParam("jsonFile") MultipartFile jsonFile) {
+        try {
+            // Obtener el contenido del archivo JSON en forma de String
+            String jsonContent = new String(jsonFile.getBytes());
+
+            // Convertir el contenido del archivo JSON a una lista de objetos EquiposDTO utilizando Jackson
+            ObjectMapper mapper = new ObjectMapper();
+            List<EquiposDTO> equipos = mapper.readValue(jsonContent, new TypeReference<List<EquiposDTO>>(){});
+
+            // Insertar la lista de objetos EquiposDTO en la base de datos utilizando el servicio EquiposService
+            equiposService.getEquipos();
+           
+            return "redirect:/go-to-Equipos";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error-page";
+        }
+    }
+    
+
 }
-
-
-//Service logica, controller me llama getEquipos, metodo que se llame getequipos en service, objeeto de tipo arraylist, 
-//getEquipos()
-//model.add(ArrayList);
-
-//@GetMapping("/go-to-Equipos")
-//public String mostrarEquipos(@RequestParam(name = "busqueda", required = false) String busqueda, Model model) {
-//    List<EquiposDTO> equipos;
-//    if (busqueda != null) {
-//        equipos = equiposService.buscarEquipos(busqueda);
-//    } else {
-//        equipos = equiposService.findAll();
-//    }
-//    model.addAttribute("equipos", equipos);
-//    
-//    return "Equipos/ListaEquipos";
-//}

@@ -15,8 +15,7 @@ public class EquiposRowMapper implements RowMapper<EquiposDTO>{
                 rs.getInt("id"),
                 rs.getString("nombre"),
                 rs.getString("pais"),
-                rs.getString("urlfoto"),
-                rs.getString("estadio")
+                rs.getString("urlfoto")
             );
             return equipo;
 	}

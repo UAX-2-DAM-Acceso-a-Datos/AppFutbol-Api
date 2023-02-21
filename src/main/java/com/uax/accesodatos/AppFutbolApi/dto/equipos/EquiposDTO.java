@@ -6,7 +6,6 @@ public class EquiposDTO {
     public String nombre;
     public String pais;
     public String urlfoto;
-    public String estadio;
 	
 	public int getId() {
 		return id;
@@ -39,26 +38,16 @@ public class EquiposDTO {
 		this.urlfoto = urlfoto;
 	}
 
-	public String getEstadio() {
-		return estadio;
-	}
-
-	public void setEstadio(String estadio) {
-		this.estadio = estadio;
-	}
-
-
 	public EquiposDTO() {
 		super();
 	}
 
-	public EquiposDTO(int id, String nombre, String pais, String urlfoto, String estadio) {
+	public EquiposDTO(int id, String nombre, String pais, String urlfoto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.pais = pais;
 		this.urlfoto = urlfoto;
-		this.estadio = estadio;
 	}
 
 

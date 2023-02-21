@@ -18,15 +18,15 @@ public class EquiposRepository implements IEquiposRepository {
 	
 	@Override
 	public List<EquiposDTO> findAll() {
-        String sql = "SELECT id, nombre, pais, urlfoto, estadio FROM equipos";
+        String sql = "SELECT id, nombre, pais, urlfoto FROM equipos";
         List<EquiposDTO> equipos = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(EquiposDTO.class));
         return equipos;
 	}
 
 	@Override
 	public boolean saveEquipo(EquiposDTO equipo) {
-	    String sql = "INSERT INTO equipos (nombre, pais, urlfoto, estadio) VALUES (?, ?, ?, ?)";
-	    int rowCount = jdbcTemplate.update(sql, equipo.getNombre(), equipo.getPais(), equipo.getUrlfoto(), equipo.getEstadio());
+	    String sql = "INSERT INTO equipos (nombre, pais, urlfoto) VALUES (?, ?, ?)";
+	    int rowCount = jdbcTemplate.update(sql, equipo.getNombre(), equipo.getPais(), equipo.getUrlfoto());
 	    return rowCount > 0;
 	}
 
