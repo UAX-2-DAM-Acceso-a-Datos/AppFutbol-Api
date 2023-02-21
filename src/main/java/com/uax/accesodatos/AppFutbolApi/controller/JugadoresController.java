@@ -27,6 +27,21 @@ public class JugadoresController {
         return "Jugadores/ListaJugadores";
     }
     
+    @GetMapping("/search-jugador")
+    public String mostrarJugador(Model model, @RequestParam("nombre") String nombre) throws IOException {
+    	
+        JugadoresDTO jugador = jugadoresService.getJugadorPorNombre(nombre);
+        
+        if (jugador != null) {
+            ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
+            jugadores.add(jugador);
+            model.addAttribute("jugadores", jugadores);
+        }
+        
+        return "Jugadores/ListaJugadores";
+    }
+
+    
     @GetMapping("/add-jugadores-favoritos")
     public String addJugadores(@RequestParam("idJugador") int idJugador, @RequestParam("nombreJugador") String nombreJugador, @RequestParam("edadJugador") int edadJugador, 
     @RequestParam("nacJugador") String nacJugador, @RequestParam("fotoJugador") String fotoJugador,  @RequestParam("equipo") int equipo) throws IOException {

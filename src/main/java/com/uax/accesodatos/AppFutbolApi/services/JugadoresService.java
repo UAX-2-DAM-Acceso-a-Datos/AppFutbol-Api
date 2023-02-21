@@ -32,7 +32,7 @@ public class JugadoresService {
     @Autowired
     JugadoresRepository jugadoresrepository;
     
-	private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
+	//private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
     
     
     public List<JugadoresDTO> convertirObjetoApitoDTO(Root root) {
@@ -54,6 +54,7 @@ public class JugadoresService {
     }
     
     public ArrayList<JugadoresDTO> getJugadores() throws IOException {
+    	
         ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
         
         String jsonResponse = utils.readFile("responsePlayers.json");
@@ -63,6 +64,25 @@ public class JugadoresService {
         jugadores = (ArrayList<JugadoresDTO>) convertirObjetoApitoDTO(root);
         
         return jugadores;
+    }
+    
+    public JugadoresDTO getJugadorPorNombre(String nombre) throws IOException {
+    	
+        ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
+        
+        String jsonResponse = utils.readFile("responsePlayers.json");
+        
+        Gson gson = new Gson();
+        Root root = gson.fromJson(jsonResponse, Root.class);
+        jugadores = (ArrayList<JugadoresDTO>) convertirObjetoApitoDTO(root);
+        
+        for (JugadoresDTO jugador : jugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombre)) {
+                return jugador;
+            }
+        }
+        
+        return null;
     }
     
     
