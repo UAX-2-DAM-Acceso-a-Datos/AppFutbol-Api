@@ -19,8 +19,11 @@ import com.uax.accesodatos.AppFutbolApi.dto.usuario.UsuarioDTO;
 import com.uax.accesodatos.AppFutbolApi.repositories.UserRepository;
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> feature/cambiosLogin
 @Service
 public class UserService implements UserDetailsService {
 

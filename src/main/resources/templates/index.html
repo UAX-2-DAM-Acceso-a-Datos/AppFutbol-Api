@@ -5,37 +5,41 @@
 	<title>Bienvenido a la aplicación de fútbol</title>
 	<!-- Carga de estilos de Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/css/styleIndex.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">AppFutbol-Api</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/go-to-Equipos">Equipos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/go-to-Jugadores">Jugadores</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Estadios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Favoritos</a>
-      </li>
-    </ul>
+<div class="container-fluid">
+  <div id="upper">
+    <h1>FOOTBALL<span style="color:red">17</span></h1>
   </div>
+</div>
+<nav class="container-fluid">
+    <ul>
+      <li class="main left"><span>HOME</span></li><li class="main"><span>PLAY</span></li><li class="main"><span>FOOTBALL CLUB</span></li><li class="right"><span href="">CUSTOMISE</span></li>
+    </ul>
 </nav>
+<div id="menu-wrapper">
+  <section id="big-menu" class="container-fluid">
+    <div class="d-flex flex-row">
+      <div class="p-2 item first">
+        <h3>TEAMS IN FORMS</h3>
+      </div>
+      <div class="p-2 item second">
+        <h3>ULTIMATE TEAM</h3>
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="p-2 item third">
+        <h3>NEW CAREER</h3>
+      </div>
+      <div class="p-2 item forth">
+        <h3>CO-OP SEASONS</h3>
+      </div>
+    </div>
 
-	<div class="container">
-		<h1>Bienvenido a la aplicación de fútbol</h1>
-	</div>
+  </section>
+  
+</div>
 
 	<!-- Carga de scripts de Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

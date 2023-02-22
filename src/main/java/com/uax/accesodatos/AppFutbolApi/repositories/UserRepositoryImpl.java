@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import com.uax.accesodatos.AppFutbolApi.dto.usuario.UsuarioDTO;
 import com.uax.accesodatos.AppFutbolApi.mapper.UsuarioRowMapper;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/cambiosLogin
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
