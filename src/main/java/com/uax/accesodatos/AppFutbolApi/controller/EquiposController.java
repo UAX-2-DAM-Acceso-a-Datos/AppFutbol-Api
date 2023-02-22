@@ -35,8 +35,36 @@ public class EquiposController {
     
     //Ir a equipos
     @GetMapping("/go-to-Equipos")
-    public String showListaEquipos(Model model) {
+    public String showListaEquipos(Model model) throws IOException {
+    	  ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
+  	    model.addAttribute("equipos", equipos);
+  	    
     	return "Equipos/ListaEquipos";
+    }
+    
+    //Buscador con JSON por pais
+    @GetMapping("/search-equipo")
+    public String mostrarEquipo(Model model, @RequestParam("nombre") String pais) throws IOException {
+    	
+        EquiposDTO equipo = equiposService.getEquipoPorPais(pais);
+        
+        if (equipo != null) {
+            ArrayList<EquiposDTO> equipos = new ArrayList<>();
+            equipos.add(equipo);
+            model.addAttribute("equipos", equipos);
+        }
+        
+        return "Equipos/ListaEquipo";
+    }
+    
+    //Funcionalidad del boton de insertar en base de datos
+    @GetMapping("add-equipos-favoritos")
+    public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
+                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto,
+                              @RequestParam("estadio") String estadio) {
+        EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
+        equiposService.addEquiposFavoritos(equipo);
+        return "redirect:/go-to-favoritos";
     }
     
 //    //Buscador con API por pais
@@ -63,13 +91,5 @@ public class EquiposController {
 //        return modelAndView;
 //    }
 
-    //Funcionalidad del boton de insertar en base de datos
-    @GetMapping("add-equipos-favoritos")
-    public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
-                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto,
-                              @RequestParam("estadio") String estadio) {
-        EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
-        equiposService.addEquiposFavoritos(equipo);
-        return "redirect:/go-to-favoritos";
-    }
+
 }

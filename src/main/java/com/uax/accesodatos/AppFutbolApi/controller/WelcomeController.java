@@ -21,16 +21,7 @@ import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Controller
 public class WelcomeController {
-	
-	@Autowired
-	AppFutbolUtils util;
-	
-	// Login form
-		@RequestMapping("/login")
-		public String login(Model model) {
 
-			return "login.html";
-		}
 
 	@Autowired
 	AppFutbolUtils util;

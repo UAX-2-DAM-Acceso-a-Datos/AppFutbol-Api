@@ -22,12 +22,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
-import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
-import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Root;
 import com.uax.accesodatos.AppFutbolApi.repositories.EquiposRepository;
-import com.uax.accesodatos.AppFutbolApi.repositories.JugadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.Response;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -48,6 +46,61 @@ public class EquiposService {
     EquiposRepository equiposrepository;
     
     
+ //Recuperar datos usando JSON
+//private final String uriTeamApiByIdTeam = "https://v3.football.api-sports.io/teams?id=1";
+    
+    
+    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
+    	
+    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
+    	
+    	for (Response response : root.getResponse()) {
+    		Team equipo=response.getTeam();
+			EquiposDTO parametros= new EquiposDTO();
+			parametros.setId(equipo.getId());
+			parametros.setUrlfoto(equipo.getLogo());
+			parametros.setNombre(equipo.getName());
+			parametros.setPais(equipo.getCountry());
+			
+			
+			equipos.add(parametros);
+		}
+    	
+    	return equipos;
+    }
+    
+    public ArrayList<EquiposDTO> getEquipos() throws IOException {
+    	
+        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+        
+        String jsonResponse = utils.readFile("responseTeams.json");
+        
+		Gson gson= new Gson();
+		Root root=gson.fromJson(jsonResponse, Root.class);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        
+        return equipos;
+    }
+    
+    public EquiposDTO getEquipoPorPais(String pais) throws IOException {
+    	
+        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+        
+        String jsonResponse = utils.readFile("responseTeams.json");
+        
+        Gson gson = new Gson();
+        Root root = gson.fromJson(jsonResponse, Root.class);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        
+        for (EquiposDTO equipo : equipos) {
+            if (equipo.getPais().equalsIgnoreCase(pais)) {
+                return equipo;
+            }
+        }
+        
+        return null;
+    }
+    
     
     
     
@@ -59,7 +112,7 @@ public class EquiposService {
 //    	
 //        ArrayList<EquiposDTO> equipos = new ArrayList<>();
 //        
-//        String jsonResponse = utils.readFile("responsePlayers.json");
+//        String jsonResponse = utils.readFile("responseTeams.json");
 //        
 //        Gson gson = new Gson();
 //        Root root = gson.fromJson(jsonResponse, Root.class);
