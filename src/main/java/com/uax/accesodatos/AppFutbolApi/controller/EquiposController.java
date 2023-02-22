@@ -39,29 +39,29 @@ public class EquiposController {
     	return "Equipos/ListaEquipos";
     }
     
-    //Buscador con API por pais
-    @GetMapping("/equipos")
-    public ModelAndView equipos(@RequestParam(name = "query", required = false) String query) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("Equipos/ListaEquipos");
-        List<EquiposDTO> equipos;
-        if (query != null && !query.isEmpty()) {
-            EquiposResponseDTO equiposResponseDTO = equiposService.getEquiposFromApi();
-            List<Response> response = equiposResponseDTO.getResponse();
-            equipos = new ArrayList<>();
-            for (Response equipo : response) {
-                EquiposDTO equiposDTO = new EquiposDTO();
-                equiposDTO.setNombre(equipo.getTeam().getName());
-                equiposDTO.setPais(equipo.getTeam().getCountry());
-                equiposDTO.setUrlfoto(equipo.getTeam().getLogo());
-                equipos.add(equiposDTO);
-            }
-            equipos = equipos.stream().filter(equipo -> equipo.getPais().equalsIgnoreCase(query)).collect(Collectors.toList());
-        } else {
-            equipos = equiposService.findAll();
-        }
-        modelAndView.addObject("equipos", equipos);
-        return modelAndView;
-    }
+//    //Buscador con API por pais
+//    @GetMapping("/equipos")
+//    public ModelAndView equipos(@RequestParam(name = "query", required = false) String query) throws IOException {
+//        ModelAndView modelAndView = new ModelAndView("Equipos/ListaEquipos");
+//        List<EquiposDTO> equipos;
+//        if (query != null && !query.isEmpty()) {
+//            EquiposResponseDTO equiposResponseDTO = equiposService.getEquiposFromApi();
+//            List<Response> response = equiposResponseDTO.getResponse();
+//            equipos = new ArrayList<>();
+//            for (Response equipo : response) {
+//                EquiposDTO equiposDTO = new EquiposDTO();
+//                equiposDTO.setNombre(equipo.getTeam().getName());
+//                equiposDTO.setPais(equipo.getTeam().getCountry());
+//                equiposDTO.setUrlfoto(equipo.getTeam().getLogo());
+//                equipos.add(equiposDTO);
+//            }
+//            equipos = equipos.stream().filter(equipo -> equipo.getPais().equalsIgnoreCase(query)).collect(Collectors.toList());
+//        } else {
+//            equipos = equiposService.findAll();
+//        }
+//        modelAndView.addObject("equipos", equipos);
+//        return modelAndView;
+//    }
 
     //Funcionalidad del boton de insertar en base de datos
     @GetMapping("add-equipos-favoritos")

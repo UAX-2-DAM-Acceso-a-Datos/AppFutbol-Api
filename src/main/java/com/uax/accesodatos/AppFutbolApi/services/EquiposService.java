@@ -22,6 +22,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Root;
 import com.uax.accesodatos.AppFutbolApi.repositories.EquiposRepository;
 import com.uax.accesodatos.AppFutbolApi.repositories.JugadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
@@ -45,53 +47,32 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
-    private final String urlEquiposApi = "https://v3.football.api-sports.io/teams?id=?";
     
-    public EquiposResponseDTO getEquiposFromApi() throws IOException {
-        RestTemplate restTemplate = new RestTemplate();
-
-        // Construir la URL de la API
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("https://v3.football.api-sports.io/teams");
-
-        // Agregar los parámetros de consulta necesarios a la URL
-        builder.queryParam("search", "Spain");
-
-        // Agregar los encabezados necesarios a la solicitud HTTP
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-key", "ae76f089a66a76dafc4e958eab705477");
-        headers.set("x-rapidapi-host", "v3.football.api-sports.io");
-
-        // Crear una instancia de HttpEntity con los encabezados necesarios
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-        // Realizar la solicitud HTTP
-        ResponseEntity<String> response = restTemplate.exchange(
-                builder.toUriString(),
-                HttpMethod.GET,
-                entity,
-                String.class);
-
-        // Analizar la respuesta JSON en objetos Java utilizando un ObjectMapper
-        ObjectMapper mapper = new ObjectMapper();
-        Root root = mapper.readValue(response.getBody(), Root.class);
-
-        // Obtener la lista de equipos y filtrarla por país
-        List<EquiposDTO> equipos = root.getResponse().stream()
-                .filter(r -> r.getTeam().getCountry().equals("Spain"))
-                .map(r -> {
-                    EquiposDTO equipo = new EquiposDTO();
-                    equipo.setNombre(r.getTeam().getName());
-                    equipo.setPais(r.getTeam().getCountry());
-                    equipo.setUrlfoto(r.getTeam().getLogo());
-                    return equipo;
-                })
-                .collect(Collectors.toList());
-
-        // Crear y devolver un objeto EquiposResponseDTO con la lista de equipos
-        EquiposResponseDTO equiposResponseDTO = new EquiposResponseDTO();
-        equiposResponseDTO.setResponse(equipos);
-        return equiposResponseDTO;
-    }
+    
+    
+    
+    
+//    //Recuperar datos por búsqueda usando la API
+//    private final String urlEquiposApi = "https://v3.football.api-sports.io/teams?search=%Busqueda%";
+//    
+//    public JugadoresDTO getEquipoPorNombre(String nombre) throws IOException {
+//    	
+//        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+//        
+//        String jsonResponse = utils.readFile("responsePlayers.json");
+//        
+//        Gson gson = new Gson();
+//        Root root = gson.fromJson(jsonResponse, Root.class);
+//        equipos = (ArrayList<EquiposDTO>) convertirObjetoApitoDTO(root);
+//        
+//        for (EquiposDTO equipo: equipos) {
+//            if (equipo.getNombre().equalsIgnoreCase(nombre)) {
+//                return equipo;
+//            }
+//        }
+//        
+//        return null;
+//    }
 
     public List<EquiposDTO> findAll() {
     	
