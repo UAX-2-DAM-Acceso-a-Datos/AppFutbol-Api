@@ -42,7 +42,7 @@ public class JugadoresService {
 			Player jugador = response.getPlayer();
 			JugadoresDTO parametros = new JugadoresDTO();
 			parametros.setId(jugador.getId());
-			parametros.setNombre(jugador.getName());
+			parametros.setNombre(jugador.getFirstname());
 			parametros.setEdad(jugador.getAge());
 			parametros.setNacionalidad(jugador.getNationality());
 			parametros.setUrlfoto(jugador.getPhoto());
