@@ -25,7 +25,6 @@ import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 import com.uax.accesodatos.AppFutbolApi.repositories.EquiposRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
-import com.uax.accesodatos.AppFutbolApi.dto.equipos.Response;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -55,6 +54,7 @@ public class EquiposService {
     	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
     	
     	for (Response response : root.getResponse()) {
+    		
     		Team equipo=response.getTeam();
 			EquiposDTO parametros= new EquiposDTO();
 			parametros.setId(equipo.getId());
@@ -82,7 +82,7 @@ public class EquiposService {
         return equipos;
     }
     
-    public EquiposDTO getEquipoPorPais(String pais) throws IOException {
+public List<EquiposDTO> getEquipoPorNombre(String nombre) throws IOException {
     	
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         
@@ -92,15 +92,14 @@ public class EquiposService {
         Root root = gson.fromJson(jsonResponse, Root.class);
         equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
         
-        for (EquiposDTO equipo : equipos) {
-            if (equipo.getPais().equalsIgnoreCase(pais)) {
-                return equipo;
-            }
-        }
-        
-        return null;
-    }
-    
+        List<EquiposDTO> equiposFiltrados = equipos.stream()
+                .filter(equipo -> equipo.getNombre().equalsIgnoreCase(nombre))
+                .collect(Collectors.toList());
+
+        return equiposFiltrados;
+}
+
+
     
     
     

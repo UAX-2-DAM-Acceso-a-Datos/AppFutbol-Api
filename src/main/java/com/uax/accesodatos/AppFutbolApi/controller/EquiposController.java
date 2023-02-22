@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +27,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
@@ -32,6 +36,12 @@ public class EquiposController {
 
     @Autowired
     private EquiposService equiposService;
+    
+    @Autowired
+	AppFutbolUtils utils;
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     
     //Ir a equipos
     @GetMapping("/go-to-Equipos")
@@ -42,11 +52,11 @@ public class EquiposController {
     	return "Equipos/ListaEquipos";
     }
     
-    //Buscador con JSON por pais
+    //Buscar equipos usando json
     @GetMapping("/search-equipo")
-    public String mostrarEquipo(Model model, @RequestParam("nombre") String pais) throws IOException {
+    public String mostrarEquipo(Model model, @RequestParam("nombre") String nombre) throws IOException {
     	
-        EquiposDTO equipo = equiposService.getEquipoPorPais(pais);
+        EquiposDTO equipo = (EquiposDTO) equiposService.getEquipoPorNombre(nombre);
         
         if (equipo != null) {
             ArrayList<EquiposDTO> equipos = new ArrayList<>();
@@ -54,18 +64,19 @@ public class EquiposController {
             model.addAttribute("equipos", equipos);
         }
         
-        return "Equipos/ListaEquipo";
+        return "Equipos/ListaJugadores";
     }
+
     
-    //Funcionalidad del boton de insertar en base de datos
+    //Funcionalidad del boton de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos")
     public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
-                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto,
-                              @RequestParam("estadio") String estadio) {
+                              @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
         EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
         equiposService.addEquiposFavoritos(equipo);
         return "redirect:/go-to-favoritos";
     }
+    
     
 //    //Buscador con API por pais
 //    @GetMapping("/equipos")

@@ -1,12 +1,24 @@
 package com.uax.accesodatos.AppFutbolApi.dto.equipos;
 
+import java.util.List;
+
+import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 
 public class EquiposDTO {
 	public int id;
     public String nombre;
     public String pais;
     public String urlfoto;
+	private List<EquiposDTO> data;
 	
+	public List<EquiposDTO> getData() {
+		return data;
+	}
+
+	public void setData(List<EquiposDTO> data) {
+		this.data = data;
+	}
+
 	public int getId() {
 		return id;
 	}

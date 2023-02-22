@@ -19,7 +19,6 @@ import com.uax.accesodatos.AppFutbolApi.dto.usuario.UsuarioDTO;
 import com.uax.accesodatos.AppFutbolApi.repositories.UserRepository;
 
 
-
 @Service
 public class UserService implements UserDetailsService {
 
