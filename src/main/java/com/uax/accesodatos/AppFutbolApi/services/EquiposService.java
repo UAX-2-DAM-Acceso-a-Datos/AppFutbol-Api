@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -45,19 +47,50 @@ public class EquiposService {
     
     private final String urlEquiposApi = "https://v3.football.api-sports.io/teams?id=?";
     
-    //Obtener Equipos desde la API
-    public EquiposResponseDTO getEquiposFromApi() {
+    public EquiposResponseDTO getEquiposFromApi() throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Construir la URL de la API
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("https://v3.football.api-sports.io/teams");
+
+        // Agregar los parámetros de consulta necesarios a la URL
+        builder.queryParam("search", "Spain");
+
+        // Agregar los encabezados necesarios a la solicitud HTTP
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("x-rapidapi-key", "ae76f089a66a76dafc4e958eab705477");
         headers.set("x-rapidapi-host", "v3.football.api-sports.io");
-        headers.set("x-rapidapi-key","ae76f089a66a76dafc4e958eab705477");
 
-        String urlEquiposApi = "https://v3.football.api-sports.io/teams";
+        // Crear una instancia de HttpEntity con los encabezados necesarios
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<EquiposResponseDTO> response = restTemplate.exchange(urlEquiposApi, HttpMethod.GET, entity, EquiposResponseDTO.class);
+        // Realizar la solicitud HTTP
+        ResponseEntity<String> response = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.GET,
+                entity,
+                String.class);
 
-        return response.getBody();
+        // Analizar la respuesta JSON en objetos Java utilizando un ObjectMapper
+        ObjectMapper mapper = new ObjectMapper();
+        Root root = mapper.readValue(response.getBody(), Root.class);
+
+        // Obtener la lista de equipos y filtrarla por país
+        List<EquiposDTO> equipos = root.getResponse().stream()
+                .filter(r -> r.getTeam().getCountry().equals("Spain"))
+                .map(r -> {
+                    EquiposDTO equipo = new EquiposDTO();
+                    equipo.setNombre(r.getTeam().getName());
+                    equipo.setPais(r.getTeam().getCountry());
+                    equipo.setUrlfoto(r.getTeam().getLogo());
+                    return equipo;
+                })
+                .collect(Collectors.toList());
+
+        // Crear y devolver un objeto EquiposResponseDTO con la lista de equipos
+        EquiposResponseDTO equiposResponseDTO = new EquiposResponseDTO();
+        equiposResponseDTO.setResponse(equipos);
+        return equiposResponseDTO;
     }
 
     public List<EquiposDTO> findAll() {
@@ -86,40 +119,4 @@ public class EquiposService {
 		
 		
 	}
-    
-    
-//    //convertir de objeto API a DTO
-//    
-//    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
-//    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
-//    	
-//    	for (Response response : root.getResponse()) {
-//    		Team equipo=response.getTeam();
-//			EquiposDTO parametros= new EquiposDTO();
-//			parametros.setId(equipo.getId());
-//			parametros.setUrlfoto(equipo.getLogo());
-//			parametros.setNombre(equipo.getName());
-//			parametros.setPais(equipo.getCountry());
-//			
-//			
-//			equipos.add(parametros);
-//		}
-//    	
-//    	return equipos;
-//    }
-//   
-//    public ArrayList<EquiposDTO> getEquipos() throws IOException {
-//        ArrayList<EquiposDTO> equipos = new ArrayList<>();
-//        
-//        String jsonResponse = utils.readFile("responseTeams.json");
-//
-//		Gson gson= new Gson();
-//		Root root=gson.fromJson(jsonResponse, Root.class);
-//        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
-//
-//        return equipos;
-//    }
-
-
-
 }

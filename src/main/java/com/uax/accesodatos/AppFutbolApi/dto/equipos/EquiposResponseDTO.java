@@ -12,6 +12,7 @@ public class EquiposResponseDTO {
     private Paging paging;
     private List<EquiposDTO> equipos;
     private Object errors;
+	private List<EquiposDTO> response;
 	public String getGet() {
 		return get;
 	}
@@ -74,5 +75,9 @@ public class EquiposResponseDTO {
 		return responses;
 
 	}
+	  public void setResponse(List<EquiposDTO> response) {
+	        this.response = response;
+	    }
+
 
 }

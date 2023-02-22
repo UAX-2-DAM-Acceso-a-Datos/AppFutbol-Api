@@ -1,6 +1,18 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  min-height: calc(100vh - 70px); /* altura de la ventana menos altura de la barra de navegación */
+  padding: 20px;
+}
 
 
 .navbar {
+	position: fixed;
+  	top: 0;
+  	width: 100%;
     background-color: #FFE116;
     overflow: hidden;
 }
@@ -56,6 +68,152 @@ h1, h2, h3, h4, h5, h6 {
 
 .table td {
   border: none;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  z-index: 9999;
+}
+
+.sidebar {
+ height: 100vh;
+  width: 16%;
+  position: fixed;
+  top: 70px; /* altura de la barra de navegación */
+  overflow-y: scroll;
+
+}
+
+.sidebar-left {
+  left: 0;
+  background-color: #f1f1f1;
+  background-image: url("/images/others/goenji.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.sidebar-right {
+  right: 0;
+  background-color: #ccc;
+  background-image: url("/images/others/endoumamoru.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 20px;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  /* otros estilos */
+}
+
+/* Estilos para la columna de la izquierda */
+.sidebar-left {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 18%;
+  height: calc(100% - 50px);
+  /* otros estilos */
+}
+
+/* Estilos para la columna de la derecha */
+.sidebar-right {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  width: 18%;
+  height: calc(100% - 50px);
+  /* otros estilos */
+}
+
+/* Estilos para el contenido principal */
+.content {
+  margin: 0 auto;
+  padding: 20px;
+  width: calc(100% - 400px);
+  /* otros estilos */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  /* otros estilos */
+}
+
+p {
+  color: #FFE116;
+  font-family: Arial;
+  font-size: 16px;
+}
+.social i {
+    font-size: 24px;
+}
+a {
+  color: #FFE116;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #EA5522;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #212227;
+  text-decoration: underline;
+}
+.col-md-4 {
+  text-align: center;
+}
+
+.social li {
+  list-style: none;
+}
+
+.social img {
+  height: 30px;
+  width: auto;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.social img {
+  height: 30px;
+  width: auto;
+}
+.busqueda-equipos {
+  display: flex;
+  align-items: center;
+}
+
+.busqueda-equipos img {
+  max-width: 200px;
+  margin-left: 20px;
+}
+footer a {
+  display: block;
+  text-align: center;
 }
 
 
