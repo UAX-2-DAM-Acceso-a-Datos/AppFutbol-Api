@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
-import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Controller
 public class WelcomeController {
@@ -25,15 +24,7 @@ public class WelcomeController {
 	@Autowired
 	AppFutbolUtils util;
 	
-	// Login form
-		@RequestMapping("/login")
-		public String login(Model model) {
-
-			return "login.html";
-		}
-
-	@Autowired
-	AppFutbolUtils util;
+	// Log
 	
 	// Login form
 	@RequestMapping("/login")
