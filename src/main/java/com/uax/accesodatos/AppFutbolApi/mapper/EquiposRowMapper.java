@@ -13,14 +13,10 @@ public class EquiposRowMapper implements RowMapper<EquiposDTO>{
 	public EquiposDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         EquiposDTO equipo = new EquiposDTO(
                 rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("season"),
-                rs.getString("country"),
-                rs.getString("logo"),
-                rs.getString("urlimage"),
-                rs.getString("venue")
+                rs.getString("nombre"),
+                rs.getString("pais"),
+                rs.getString("urlfoto")
             );
             return equipo;
 	}
-
 }

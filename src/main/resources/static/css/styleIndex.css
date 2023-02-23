@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css?family=Exo");
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Exo";
+}
+
+body {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url(http://orig10.deviantart.net/c37f/f/2016/188/0/d/background_fav___share_by_dreamgraphicss-da93xt5.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+nav {
+  position: absolute;
+  font-size: 1.2em;
+  margin: 30px 0;
+}
+nav ul {
+  margin: 0 auto;
+}
+nav ul li {
+  text-align: center;
+  display: inline-block;
+  background: rgba(220, 220, 220, 0.5);
+  padding: 5px 50px;
+  transform: skew(30deg, 0deg);
+}
+nav ul li.main:after {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 50%;
+}
+nav ul li.right {
+  background: none;
+  background-image: linear-gradient(to right, rgba(220, 220, 220, 0.5) 70%, rgba(192, 192, 192, 0));
+}
+nav ul li.left {
+  background: none;
+  background-image: linear-gradient(to left, rgba(220, 220, 220, 0.5) 65%, rgba(192, 192, 192, 0));
+}
+nav ul li:hover {
+  background: #f2f2f2;
+  color: #222;
+  text-shadow: 0px 0px 0.1px #222;
+}
+nav ul li span {
+  display: block;
+  transform: skew(-30deg, 0deg);
+  color: #444;
+  font-weight: 700;
+  font-family: "Exo", sans-serif;
+}
+nav ul li span:hover {
+  text-decoration: none;
+  color: #222;
+}
+
+#upper {
+  color: #fff;
+  font-family: "Exo";
+  padding: 15px 50px;
+  margin: 15px 0;
+}
+#upper #user {
+  background: rgba(192, 192, 192, 0.7);
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  right: 60px;
+  padding: 15px;
+  margin: auto;
+  height: 70%;
+  width: 30%;
+  border-radius: 30px;
+}
+
+#big-menu {
+  margin: 0px 40px 150px 40px;
+  transition: left 0.3s ease-out;
+}
+
+.item {
+  color: #fff;
+  width: 100%;
+  height: 140px;
+  margin: 5px;
+  background-size: 100% 200%;
+  background-position: right;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease-in-out;
+}
+.item h3 {
+  padding: 5px;
+}
+.item.first {
+  background-image: linear-gradient(130deg, rgba(172, 172, 172, 0.9) 25%, rgba(172, 172, 172, 0.3)), url(https://media.easports.com/content/www-easports/en_US/fifa/news/2015/fifa-16-e3-gameplay-trailer/_jcr_content/headerImages/image.img.jpg);
+}
+.item.second {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(255, 255, 255, 0.7)), url(https://s.ndtvimg.com/images/stories/brazuca-640.jpg);
+}
+.item.third {
+  background-image: linear-gradient(130deg, #848484 25%, rgba(172, 172, 172, 0.1)), url(https://secure.static.tumblr.com/3fa5a6adcf051c7caa86753cabdbd2d7/mxodn4s/AoOmtdxe7/tumblr_static_bg.jpg);
+}
+.item.forth {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(172, 172, 172, 0.1)), url(https://eaassets-a.akamaihd.net/vassets.ea.com/Assets/Resources/Image/fifa-product-fifa14-gen3.jpg?cb=2013-09-13T15:13:21+0000);
+}
+.item.fifth {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(172, 172, 172, 0.1)), url(https://s.ndtvimg.com/images/stories/brazuca-640.jpg);
+}
+.item.sixth {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(172, 172, 172, 0.1)), url(http://web-vassets.ea.com/Assets/Richmedia/Image/Backgrounds/fifa-09-ultimate-team-small-bg-1366x650.jpg?cb=1412974798);
+}
+.item.seventh {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(172, 172, 172, 0.1)), url(https://eaassets-a.akamaihd.net/vassets.ea.com/Assets/Resources/www/ea.com/Image/FIFA_14_Products_Overview_Gen4_UK_bg.jpg?cb=2013-11-18T03:49:41+0000);
+}
+.item.last {
+  background-image: linear-gradient(130deg, rgba(132, 132, 132, 0.9) 25%, rgba(172, 172, 172, 0.1)), url(http://s2.glbimg.com/naKjX6F3dpjHcl5IRL2O-IiuT_U=/s.glbimg.com/jo/g1/f/original/2014/06/12/neymar_2.jpg);
+}
+.item:hover {
+  transform: scale(1.02);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#menu-wrapper {
+  position: absolute;
+  width: 90%;
+  margin: 105px 0 10px 0;
+}
+
+#second-menu {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: -2000px;
+  font-size: 3em;	
+  color: #fff;
+  top: 0;
+}

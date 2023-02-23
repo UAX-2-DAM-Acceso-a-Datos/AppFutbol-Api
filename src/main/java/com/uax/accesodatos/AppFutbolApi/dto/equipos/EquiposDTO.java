@@ -2,72 +2,67 @@ package com.uax.accesodatos.AppFutbolApi.dto.equipos;
 
 import java.util.List;
 
+import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
+
 public class EquiposDTO {
-	
 	public int id;
-    public String name;
-    public String season;
-    public String country;
-    public String logo;
-    public String venue;
+    public String nombre;
+    public String pais;
+    public String urlfoto;
 	private List<EquiposDTO> data;
 	
-	public EquiposDTO() {
-		super();
+	public List<EquiposDTO> getData() {
+		return data;
 	}
 
-	public EquiposDTO(int id, String name, String season, String country, String logo, String urlimage, String venue) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.season = season;
-		this.country = country;
-		this.logo = logo;
-		this.venue = venue;
+	public void setData(List<EquiposDTO> data) {
+		this.data = data;
 	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getSeason() {
-		return season;
+
+	public String getPais() {
+		return pais;
 	}
-	public void setSeason(String season) {
-		this.season = season;
+
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
-	public String getCountry() {
-		return country;
+
+	public String getUrlfoto() {
+		return urlfoto;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+
+	public void setUrlfoto(String urlfoto) {
+		this.urlfoto = urlfoto;
 	}
-	public String getLogo() {
-		return logo;
+
+	public EquiposDTO() {
+		super();
 	}
-	public void setLogo(String logo) {
-		this.logo = logo;
+
+	public EquiposDTO(int id, String nombre, String pais, String urlfoto) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.pais = pais;
+		this.urlfoto = urlfoto;
 	}
-	public String getVenue() {
-		return venue;
-	}
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
-	
-	public List<EquiposDTO> getData() {
-		return getData();
-	}
-	public void setData(List<EquiposDTO> data) {
-		this.data = data;
-	}
+
+
+
 
 }

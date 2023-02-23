@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/login.css}" rel="stylesheet" href=../static/css/login.css />
+  <link th:href="@{/js/login.js}" rel="../static/js/login.js" href=../static/js/login.js ></link>
+    <title>Pantalla de login</title>
+</head>
+<body>
+
+
+<div th:if="${param.logout}">
+    Hasta pronto!
+</div>
+
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">
+      Football API
+    </div>
+   
+  </div>
+  <div class="form-container">
+   
+    <div class="form-inner">
+   <form method="post" th:action="@{/process-login}">
+        <div class="field">
+          <input type="text" name="username" placeholder="Usuario" required>
+        </div>
+        <div class="field">
+          <input type="password"  name="password" placeholder="Contraseña" required>
+        </div>
+       
+        <div th:if="${param.error}">
+    Usuario o contraseña incorrecto
+</div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Aceptar">
+        </div>
+         <div class="pass-link">
+          <a href="#">Olvidaste la contraseña?</a>
+        </div>
+        <div class="signup-link">
+          No eres miembro? <a href="/pantallaRegistro">Registrate!</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

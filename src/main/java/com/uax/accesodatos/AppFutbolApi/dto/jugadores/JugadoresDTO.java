@@ -26,7 +26,11 @@ public class JugadoresDTO {
 		this.urlfoto = urlfoto;
 		this.equipo = equipo;
 	}
-
+	
+	public JugadoresDTO(String nombre, String urlfoto) {
+		this.nombre = nombre;
+		this.urlfoto = urlfoto;
+	}
 	
 	public int getId() {
 		return id;

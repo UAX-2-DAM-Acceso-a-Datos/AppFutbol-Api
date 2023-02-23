@@ -17,16 +17,19 @@ import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Player;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Response;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.Root;
+import com.uax.accesodatos.AppFutbolApi.repositories.JugadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Service
 public class JugadoresService {
 	
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+	AppFutbolUtils utils;
     
     @Autowired
-	AppFutbolUtils utils;
+    JugadoresRepository jugadoresrepository;
+    
+	//private final String uriPlayerApiByIdPlayer = "https://v3.football.api-sports.io/players?id&season=2022";
     
     
     public List<JugadoresDTO> convertirObjetoApitoDTO(Root root) {
@@ -36,7 +39,7 @@ public class JugadoresService {
 			Player jugador = response.getPlayer();
 			JugadoresDTO parametros = new JugadoresDTO();
 			parametros.setId(jugador.getId());
-			parametros.setNombre(jugador.getName());
+			parametros.setNombre(jugador.getFirstname());
 			parametros.setEdad(jugador.getAge());
 			parametros.setNacionalidad(jugador.getNationality());
 			parametros.setUrlfoto(jugador.getPhoto());
@@ -48,15 +51,57 @@ public class JugadoresService {
     }
     
     public ArrayList<JugadoresDTO> getJugadores() throws IOException {
+    	
         ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
         
         String jsonResponse = utils.readFile("responsePlayers.json");
-
+        
 		Gson gson= new Gson();
 		Root root=gson.fromJson(jsonResponse, Root.class);
         jugadores = (ArrayList<JugadoresDTO>) convertirObjetoApitoDTO(root);
-
+        
         return jugadores;
     }
+    
+    public JugadoresDTO getJugadorPorNombre(String nombre) throws IOException {
+    	
+        ArrayList<JugadoresDTO> jugadores = new ArrayList<>();
+        
+        String jsonResponse = utils.readFile("responsePlayers.json");
+        
+        Gson gson = new Gson();
+        Root root = gson.fromJson(jsonResponse, Root.class);
+        jugadores = (ArrayList<JugadoresDTO>) convertirObjetoApitoDTO(root);
+        
+        for (JugadoresDTO jugador : jugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombre)) {
+                return jugador;
+            }
+        }
+        
+        return null;
+    }
+    
+    
+	public boolean addJugadoresFavoritos(JugadoresDTO jugador){
+		
+		jugadoresrepository.saveJugador(jugador);
+		
+		return true;
+	}
+	
+	public boolean deleteJugadoresFavoritos(int id){
+		
+		jugadoresrepository.deleteJugador(id);
+		
+		return true;
+	}
+	
+	public List<JugadoresDTO> getListaFavoritos() throws IOException{
+		
+		return jugadoresrepository.getAllJugadores();
+		
+		
+	}
 
 }
