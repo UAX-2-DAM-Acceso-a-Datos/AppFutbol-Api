@@ -24,9 +24,6 @@ import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 public class JugadoresService {
 	
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    
-    @Autowired
 	AppFutbolUtils utils;
     
     @Autowired

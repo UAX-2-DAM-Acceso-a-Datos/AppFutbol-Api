@@ -19,5 +19,4 @@ public class EquiposRowMapper implements RowMapper<EquiposDTO>{
             );
             return equipo;
 	}
-
 }

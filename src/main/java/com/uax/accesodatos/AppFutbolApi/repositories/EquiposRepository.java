@@ -36,6 +36,7 @@ public class EquiposRepository implements IEquiposRepository {
 	    int rowCount = jdbcTemplate.update(sql, id);
 	    return rowCount > 0;
 	}
+
 	
 
 }

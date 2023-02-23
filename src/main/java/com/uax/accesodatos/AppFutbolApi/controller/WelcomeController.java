@@ -20,11 +20,9 @@ import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 @Controller
 public class WelcomeController {
-	
+
 	@Autowired
 	AppFutbolUtils util;
-	
-	// Log
 	
 	// Login form
 	@RequestMapping("/login")
@@ -37,6 +35,7 @@ public class WelcomeController {
     public String home() throws IOException {
     	
     	String response = util.readFile("responsePlayers.json");
+    	String responseEquipos = util.readFile("responseTeams.json");
         return "index";
     }
     
