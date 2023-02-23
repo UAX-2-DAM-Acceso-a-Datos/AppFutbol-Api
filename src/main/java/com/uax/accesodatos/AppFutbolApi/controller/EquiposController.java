@@ -72,6 +72,8 @@ public class EquiposController {
 
 
     //Método temporal para convertirObjetoApiToDTO
+    //para convertir los datos de "Root" 
+    //en una lista de objetos "EquiposDTO"
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
