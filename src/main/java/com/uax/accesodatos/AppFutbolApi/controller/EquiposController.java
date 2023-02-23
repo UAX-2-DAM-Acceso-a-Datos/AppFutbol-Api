@@ -41,7 +41,7 @@ public class EquiposController {
     @Autowired
 	AppFutbolUtils utils;
     
-    //Ir a equipos
+    //Ir a equipos y almacena equipos en una array y los pasa con model
     @GetMapping("/go-to-Equipos")
     public String showListaEquipos(Model model) throws IOException {
     	  ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
@@ -58,20 +58,20 @@ public class EquiposController {
         Root root = objectMapper.readValue(jsonResponse, Root.class);
 
         List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
-
+        //Condición para buscar el nombre de los equipos
         if (nombre != null && !nombre.isEmpty()) {
             equipos = equipos.stream()
                     .filter(equipo -> equipo.getNombre().toLowerCase().contains(nombre.toLowerCase()))
                     .collect(Collectors.toList());
         }
-
+        //Los devuelve con un model
         model.addAttribute("equipos", equipos);
 
         return "Equipos/ListaEquipos";
     }
 
 
-    //Método temporal para convertirObjetoApiToDTO
+    //Método temporal en controller para convertirObjetoApiToDTO
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
@@ -86,8 +86,7 @@ public class EquiposController {
         return equipos;
     }
 
-
-	//Funcionalidad del boton de insertar en base de datos con JSON
+	//Funcionalidad del boton para obtener datos de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos")
     public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
@@ -96,19 +95,19 @@ public class EquiposController {
         
         return "redirect:/go-to-Favoritos";
     }
-    
+    //Funcionalidad del boton para insertar datos de insertar en base de datos con JSON
     @PostMapping("/add-equipos-favoritos")
     public String addEquipoFavorito(@RequestParam("id") int id, 
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("pais") String pais,
                                     @RequestParam("urlfoto") String urlfoto) {
-        // Tu código para insertar el equipo en la base de datos
+    
 
         return "redirect:/go-to-Favoritos";
     }
 
     
-//    //Buscador con API por pais
+//    //Buscador con API por pais pendiente de implementar
 //    @GetMapping("/equipos")
 //    public ModelAndView equipos(@RequestParam(name = "query", required = false) String query) throws IOException {
 //        ModelAndView modelAndView = new ModelAndView("Equipos/ListaEquipos");
