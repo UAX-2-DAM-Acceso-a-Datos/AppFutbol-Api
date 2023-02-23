@@ -40,9 +40,6 @@ public class EquiposController {
     @Autowired
 	AppFutbolUtils utils;
     
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    
     //Ir a equipos
     @GetMapping("/go-to-Equipos")
     public String showListaEquipos(Model model) throws IOException {
@@ -64,16 +61,17 @@ public class EquiposController {
             model.addAttribute("equipos", equipos);
         }
         
-        return "Equipos/ListaJugadores";
+        return "Equipos/ListaEquipos";
     }
 
     
     //Funcionalidad del boton de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos")
-    public String addEquipos(@RequestParam("idEquipo") int idEquipo, @RequestParam("nombreEquipo") String nombreEquipo,
+    public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
-        EquiposDTO equipo = new EquiposDTO(idEquipo, nombreEquipo, pais, urlfoto);
+        EquiposDTO equipo = new EquiposDTO(id, nombre, pais, urlfoto);
         equiposService.addEquiposFavoritos(equipo);
+        
         return "redirect:/go-to-favoritos";
     }
     

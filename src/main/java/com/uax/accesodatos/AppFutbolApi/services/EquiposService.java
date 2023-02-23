@@ -22,6 +22,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.equipos.Root;
 import com.uax.accesodatos.AppFutbolApi.repositories.EquiposRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
@@ -34,18 +36,13 @@ public class EquiposService {
 	
 	@Autowired
 	AppFutbolUtils utils;
-	    
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    
-    @Autowired
-    private RestTemplate restTemplate;
+	   
     
     @Autowired
     EquiposRepository equiposrepository;
     
     
- //Recuperar datos usando JSON
+//Recuperar datos usando JSON
 //private final String uriTeamApiByIdTeam = "https://v3.football.api-sports.io/teams?id=1";
     
     
@@ -68,7 +65,7 @@ public class EquiposService {
     	
     	return equipos;
     }
-    
+    //Obtener equipos
     public ArrayList<EquiposDTO> getEquipos() throws IOException {
     	
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
@@ -81,23 +78,25 @@ public class EquiposService {
         
         return equipos;
     }
-    
-public List<EquiposDTO> getEquipoPorNombre(String nombre) throws IOException {
-    	
-        ArrayList<EquiposDTO> equipos = new ArrayList<>();
-        
-        String jsonResponse = utils.readFile("responseTeams.json");
-        
-        Gson gson = new Gson();
-        Root root = gson.fromJson(jsonResponse, Root.class);
-        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
-        
-        List<EquiposDTO> equiposFiltrados = equipos.stream()
-                .filter(equipo -> equipo.getNombre().equalsIgnoreCase(nombre))
-                .collect(Collectors.toList());
-
-        return equiposFiltrados;
-}
+            
+        public EquiposDTO getEquipoPorNombre(String nombre) throws IOException {
+        	
+            ArrayList<EquiposDTO> equipos = new ArrayList<>();
+            
+            String jsonResponse = utils.readFile("responsePlayers.json");
+            
+            Gson gson = new Gson();
+            Root root = gson.fromJson(jsonResponse, Root.class);
+            equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+            
+            for (EquiposDTO equipo : equipos) {
+                if (equipo.getNombre().equalsIgnoreCase(nombre)) {
+                    return equipo;
+                }
+            }
+            
+            return null;
+        }
 
 
     
