@@ -47,9 +47,9 @@ public class FavoritosController {
 	
 	//Borrar Equipo
 	@GetMapping("/delete-equipo")
-	public String deleteEquipoById(@RequestParam("idEquipo") int idEquipo) {
+	public String deleteEquipoById(@RequestParam("id") int id) {
 		
-		equiposService.deleteEquiposFavoritos(idEquipo);
+		equiposService.deleteEquiposFavoritos(id);
 
 		return "redirect:/go-to-Favoritos";
 	}

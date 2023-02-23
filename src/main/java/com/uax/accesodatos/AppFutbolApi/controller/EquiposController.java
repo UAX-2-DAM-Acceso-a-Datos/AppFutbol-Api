@@ -1,5 +1,6 @@
 package com.uax.accesodatos.AppFutbolApi.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,29 +53,60 @@ public class EquiposController {
     //Buscar equipos usando json
     @GetMapping("/search-equipo")
     public String mostrarEquipo(Model model, @RequestParam("nombre") String nombre) throws IOException {
-    	
-        EquiposDTO equipo = (EquiposDTO) equiposService.getEquipoPorNombre(nombre);
-        
-        if (equipo != null) {
-            ArrayList<EquiposDTO> equipos = new ArrayList<>();
-            equipos.add(equipo);
-            model.addAttribute("equipos", equipos);
+        String jsonResponse = AppFutbolUtils.readFile("responseTeams.json");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root root = objectMapper.readValue(jsonResponse, Root.class);
+
+        List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
+
+        if (nombre != null && !nombre.isEmpty()) {
+            equipos = equipos.stream()
+                    .filter(equipo -> equipo.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                    .collect(Collectors.toList());
         }
-        
+
+        model.addAttribute("equipos", equipos);
+
         return "Equipos/ListaEquipos";
     }
 
-    
-    //Funcionalidad del boton de insertar en base de datos con JSON
+
+    //Método temporal para convertirObjetoApiToDTO
+    private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
+        List<EquiposDTO> equipos = new ArrayList<>();
+        for (Response response : root.getResponse()) {
+            Team team = response.getTeam();
+            EquiposDTO equipo = new EquiposDTO();
+            equipo.setId(team.getId());
+            equipo.setNombre(team.getName());
+            equipo.setPais(team.getCountry());
+            equipo.setUrlfoto(team.getLogo());
+            equipos.add(equipo);
+        }
+        return equipos;
+    }
+
+
+	//Funcionalidad del boton de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos")
     public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
         EquiposDTO equipo = new EquiposDTO(id, nombre, pais, urlfoto);
         equiposService.addEquiposFavoritos(equipo);
         
-        return "redirect:/go-to-favoritos";
+        return "redirect:/go-to-Favoritos";
     }
     
+    @PostMapping("/add-equipos-favoritos")
+    public String addEquipoFavorito(@RequestParam("id") int id, 
+                                    @RequestParam("nombre") String nombre,
+                                    @RequestParam("pais") String pais,
+                                    @RequestParam("urlfoto") String urlfoto) {
+        // Tu código para insertar el equipo en la base de datos
+
+        return "redirect:/go-to-Favoritos";
+    }
+
     
 //    //Buscador con API por pais
 //    @GetMapping("/equipos")

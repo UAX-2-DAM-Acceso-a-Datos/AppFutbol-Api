@@ -8,6 +8,6 @@ import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 public interface IEquiposRepository {
 	List<EquiposDTO> findAll();
 	public boolean saveEquipo(EquiposDTO equipo);
-	public boolean deleteEquipo(int id);
+	boolean deleteEquipo(int idEquipo);
 	
 }

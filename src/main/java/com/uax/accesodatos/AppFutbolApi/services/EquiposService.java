@@ -46,58 +46,43 @@ public class EquiposService {
 //private final String uriTeamApiByIdTeam = "https://v3.football.api-sports.io/teams?id=1";
     
     
-    public List<EquiposDTO>convertirObjetoApiToDTO(Root root) {
-    	
-    	ArrayList<EquiposDTO> equipos= new ArrayList<EquiposDTO>();
-    	
-    	for (Response response : root.getResponse()) {
-    		
-    		Team equipo=response.getTeam();
-			EquiposDTO parametros= new EquiposDTO();
-			parametros.setId(equipo.getId());
-			parametros.setUrlfoto(equipo.getLogo());
-			parametros.setNombre(equipo.getName());
-			parametros.setPais(equipo.getCountry());
-			
-			
-			equipos.add(parametros);
-		}
-    	
-    	return equipos;
+    public List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
+        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+        for (Response response : root.getResponse()) {
+            Team equipo = response.getTeam();
+            EquiposDTO parametros = new EquiposDTO();
+            parametros.setId(equipo.getId());
+            parametros.setUrlfoto(equipo.getLogo());
+            parametros.setNombre(equipo.getName());
+            parametros.setPais(equipo.getCountry());
+            equipos.add(parametros);
+        }
+        return equipos;
     }
     //Obtener equipos
     public ArrayList<EquiposDTO> getEquipos() throws IOException {
-    	
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
-        
         String jsonResponse = utils.readFile("responseTeams.json");
-        
-		Gson gson= new Gson();
-		Root root=gson.fromJson(jsonResponse, Root.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root root = objectMapper.readValue(jsonResponse, Root.class);
         equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
-        
         return equipos;
     }
-            
-        public EquiposDTO getEquipoPorNombre(String nombre) throws IOException {
-        	
-            ArrayList<EquiposDTO> equipos = new ArrayList<>();
-            
-            String jsonResponse = utils.readFile("responsePlayers.json");
-            
-            Gson gson = new Gson();
-            Root root = gson.fromJson(jsonResponse, Root.class);
-            equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
-            
-            for (EquiposDTO equipo : equipos) {
-                if (equipo.getNombre().equalsIgnoreCase(nombre)) {
-                    return equipo;
-                }
-            }
-            
-            return null;
-        }
 
+            
+    public EquiposDTO getEquipoPorNombre(String nombre) throws IOException {
+        ArrayList<EquiposDTO> equipos = new ArrayList<>();
+        String jsonResponse = utils.readFile("responsePlayers.json");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root root = objectMapper.readValue(jsonResponse, Root.class);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        for (EquiposDTO equipo : equipos) {
+            if (equipo.getNombre().equalsIgnoreCase(nombre)) {
+                return equipo;
+            }
+        }
+        return null;
+    }
 
     
     
