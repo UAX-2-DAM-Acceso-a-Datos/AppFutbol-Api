@@ -104,6 +104,36 @@
 	</div>
 </div>
 
+<!-- Estadios -->
+ <div class="container mt-4">
+	<div class="table-responsive">
+		<div>
+			<caption>Listado de estadios favoritos</caption>
+			<table class="table caption-top table-striped table-bordered table-sm ">
+				<thead>
+					<tr>
+						<th>Foto</th>
+						<th>Nombre</th>
+						<th>Capacidad</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="estadiofav : ${estadiosfav}">
+						<td class="pl-5 col-4"><img th:attr="src=${estadiofav.image}" class="img-fluid w-100"></td>
+						<td class="col-2" th:text="${estadiofav.name}"></td>
+						<td class="col-2" th:text="${estadiofav.capacity}"></td>
+						<td class="col-1"><a class="btn btn-danger" th:href="@{'/delete-estadio?idEstadio=' +${estadiofav.id}}" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+						  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+						  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+						</svg></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 
 	<!-- Carga de scripts de Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
