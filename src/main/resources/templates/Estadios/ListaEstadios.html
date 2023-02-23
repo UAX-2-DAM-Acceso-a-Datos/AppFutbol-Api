@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<title>Lista</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-info">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">
+				<img src="https://www.pngmart.com/files/1/Football-Ball-PNG.png" alt="Logo" width="55" height="50">AppFutbol-Api
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link active" aria-current="page" href="/">Inicio</a>
+					<a class="nav-link" href="/go-to-Equipos">Equipos</a>
+					<a class="nav-link" href="/go-to-Jugadores">Jugadores</a>
+					<a class="nav-link" href="/go-to-Estadios">Estadios</a>
+					<a class="nav-link" href="/go-to-Entrendaores">Entrenadores</a>
+					<a class="nav-link" href="/go-to-Favoritos">Favoritos</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+<div class="d-grid">
+	<h2 class="text-center">Busqueda de Estadios:</h2>
+	<form class="d-flex justify-content-center" id="form"> 
+  <input class="w-75 py-2 rounded" type="search" id="query" name="q" placeholder="Busca un estadio por ciudad">
+  <button class="ms-4 rounded bg-info border-0 p-3 px-4">Buscar</button>
+</form>
+</div>
+	
+
+	<!-- Tabla -->
+	<div class="container">
+	<form class="row">
+	<table class="m-5 col-3 border" th:each="estadio : ${estadios}">
+		<tbody>
+			<tr>
+				<td><img class="w-100 h-25" th:src="${estadio.image}"/></td>
+			</tr>
+			<tr>
+				<th class="h2 pt-4 text-center" th:text="${estadio.name}"></th>
+			</tr>
+			<tr>
+				
+				<td class="pt-3 text-center" th:text="'Capacidad: ' + ${estadio.capacity}"></td>
+			</tr>
+			<tr>
+				<td class="pt-3 d-grid"><a th:href="@{'/add-estadios-favoritos?idEstadio=' + ${estadio.id} + '&nombreEstadio=' + ${estadio.name}+ '&fotoEstadio=' + ${estadio.image}}" type="submit" class="rounded border-0 bg-warning text-center text-decoration-none text-dark">Añadir a favoritos</a></td>
+			</tr>
+			</tbody>
+	</table>
+	</form>
+	</div>
+
+	
+	
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+		integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
