@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.dto.EntrenadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.entrenadores.Response;
 import com.uax.accesodatos.AppFutbolApi.dto.entrenadores.Root;
+import com.uax.accesodatos.AppFutbolApi.repositories.EntrenadoresRepository;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
 
@@ -18,6 +19,9 @@ import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 public class EntrenadoresService {
 	@Autowired
 	AppFutbolUtils utils;
+	
+	@Autowired
+	EntrenadoresRepository entrenadorRepository;
 	
 	 public List<EntrenadoresDTO>convertirObjetoApiToDTO(Root root) {
 	    	ArrayList<EntrenadoresDTO> equipos= new ArrayList<EntrenadoresDTO>();
@@ -51,4 +55,11 @@ public class EntrenadoresService {
 
 	        return entrenadores;
 	    }
+	    
+	    public String entrenadorFavoritos(EntrenadoresDTO entrenador){
+	    	entrenadorRepository.saveEntrenadores(entrenador);
+	    	
+	    	return "Favoritos/ListaFavoritos";
+	    }
+
 }

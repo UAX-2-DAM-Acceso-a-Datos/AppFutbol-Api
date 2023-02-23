@@ -56,8 +56,9 @@
 					<th>Nombre</th>
 					<th>Edad</th>
 					<th>País</th>
-					<th>urlimagen</th>
 					<th>idTeam</th>
+					<th>urlimagen</th>
+					<th>Favoritos</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,6 +70,12 @@
 				<td th:text="${entrenador.getCountry()}"></td>
 				<td th:text="${entrenador.getIdTeam()}"></td>
 				<td><img th:attr="src=${entrenador.urlimage}, alt='Entrenador de ' + ${entrenador.name}"></td>
+				<td>
+               	<a type="button" class="btn btn-success"
+								th:href="@{'/add-entrenador?id=' + ${entrenador.id} + '&name=' + ${entrenador.name}
+								+ '&age=' + ${entrenador.age} + '&country=' + ${entrenador.country} 
+								+ '&idTeam=' + ${entrenador.idTeam} + '&urlimage=' + ${entrenador.urlimage}}">Añadir</a>
+				</td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -35,4 +35,17 @@ public class EntrenadoresController {
         return "Entrenadores/ListaEntrenadores";
     } 
 
+    
+    
+    	@GetMapping("/add-entrenador")
+    	public String addEntrenadores(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("age") int age, 
+    	@RequestParam("country") String country, @RequestParam("idTeam") String idTeam, @RequestParam("urlimage") String urlimage) throws IOException {
+        
+    		EntrenadoresDTO entrenador = new EntrenadoresDTO(id, name, age, country, urlimage, idTeam );
+    		entrenadoresService.entrenadorFavoritos(entrenador);
+
+    		return "redirect:/go-to-Favoritos";
+    	}
 }
+
+    

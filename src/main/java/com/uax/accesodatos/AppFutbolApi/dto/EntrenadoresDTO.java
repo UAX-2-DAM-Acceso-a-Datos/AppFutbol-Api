@@ -21,7 +21,7 @@ public class EntrenadoresDTO {
 	}
 
 
-	public EntrenadoresDTO(int id, String name, String age, String country, String urlimage, int idTeam) {
+	public EntrenadoresDTO(int id, String name, int idTeam, String country, String urlimage, String age) {
 		super();
 		this.id = id;
 		this.name = name;
