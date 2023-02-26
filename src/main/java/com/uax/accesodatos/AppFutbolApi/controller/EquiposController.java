@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,16 +45,25 @@ public class EquiposController {
     @Autowired
 	AppFutbolUtils utils;
     
-    //Ir a equipos y almacena equipos en una array y los pasa con model
-    @GetMapping("/go-to-Equipos")
-    public String showListaEquipos(Model model) throws IOException {
+    //Ir a equipos y almacena equipos en una array y los pasa con model LOCAL
+    @GetMapping("/go-to-Equipos-JSON")
+    public String showListaEquiposJSON(Model model) throws IOException {
     	  ArrayList<EquiposDTO> equipos = equiposService.getEquiposJSON();
   	    model.addAttribute("equipos", equipos);
   	    
     	return "Equipos/ListaEquipos";
     }
-    
-    //Buscar equipos usando json
+  //Ir a equipos y almacena equipos en una array y los pasa con model API
+    @GetMapping("/go-to-Equipos-API")
+    public String showListaEquiposAPI(Model model) throws IOException {
+        List<EquiposDTO> equipos = equiposService.getEquiposDesdeAPI();
+        model.addAttribute("equipos", equipos);
+
+        return "Equipos/ListaEquipos";
+    }
+
+
+    //Buscar equipos usando json local
     @GetMapping("/search-equipo-json")
     public String mostrarEquipoJSON(Model model, @RequestParam("nombre") String nombre) throws IOException {
         String jsonResponse = AppFutbolUtils.readFile("responseTeams.json");
@@ -70,25 +83,32 @@ public class EquiposController {
         return "Equipos/ListaEquipos";
     }
     
-    //Buscar equipos usando API
+    //Buscar equipos usando API online
     @GetMapping("/search-equipo-api")
-    public String mostrarEquipoAPI(Model model, @RequestParam("nombre") String nombre) throws IOException {
-        String jsonResponse = AppFutbolUtils.readFile("responseTeams.json");
+    public String mostrarEquipoAPI(Model model, @RequestParam("nombre") String nombre) {
+        String url = "https://api-football-v1.p.rapidapi.com/v3/teams";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-rapidapi-key", "95af3cd5edfeb7119cd7d3442536e507"); // Reemplaza YOUR_API_KEY con tu propia clave de API
+        headers.set("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("search", nombre)
+                .queryParam("league", "39"); // Reemplaza 39 con el ID de la liga que deseas buscar
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+        String jsonResponse = response.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
-        Root root = objectMapper.readValue(jsonResponse, Root.class);
-
-        List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
-        //Condición para buscar el nombre de los equipos
-        if (nombre != null && !nombre.isEmpty()) {
-            equipos = equipos.stream()
-                    .filter(equipo -> equipo.getNombre().toLowerCase().contains(nombre.toLowerCase()))
-                    .collect(Collectors.toList());
+        Root root = null;
+        try {
+            root = objectMapper.readValue(jsonResponse, Root.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        //Los devuelve con un model
+        List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
         model.addAttribute("equipos", equipos);
-
         return "Equipos/ListaEquipos";
     }
+
 
 
     //Método temporal para convertirObjetoApiToDTO
