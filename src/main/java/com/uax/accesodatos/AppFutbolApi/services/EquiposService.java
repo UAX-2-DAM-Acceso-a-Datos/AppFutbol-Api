@@ -43,12 +43,11 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
+    //Datos de la API
     private static final String API_URL = "https://v3.football.api-sports.io/teams";
     private static final String API_KEY = "95af3cd5edfeb7119cd7d3442536e507";
     
-//Recuperar datos usando JSON 
-//Convertir objeto api to dto para json
-
+//Recuperar datos usando JSON LOCAL
     public List<EquiposDTO> convertirObjetoApiToDTOJSON(Root root) {
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
@@ -64,7 +63,7 @@ public class EquiposService {
     }
 
 
-    //Obtener equipos desde JSON
+    //Obtener equipos desde JSON LOCAL
     public ArrayList<EquiposDTO> getEquiposJSON() throws IOException {
 
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
@@ -76,7 +75,7 @@ public class EquiposService {
     }
 
 
-    //Obtiene equipo por nombre desde JSON
+    //BUSCADOR Obtiene equipo por nombre desde JSON LOCAL
     public EquiposDTO getEquipoPorNombreJSON(String nombre) throws IOException {
 
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
@@ -92,7 +91,7 @@ public class EquiposService {
         return null;
     }
 
-    //Obtener equipos desde la api API-SPORTS ACCOUNT
+    //Obtener equipos desde la api API-SPORTS ACCOUNT ONLINE
     public List<EquiposDTO> getEquiposDesdeAPI() throws JsonMappingException, JsonProcessingException {
         String url = "https://v3.football.api-sports.io/teams";
         String apiKey = "95af3cd5edfeb7119cd7d3442536e507";
@@ -123,7 +122,7 @@ public class EquiposService {
     }
 
     
-    // Convertir la respuesta JSON en una lista de objetos EquiposDTO
+    // Convertir la respuesta JSON en una lista de objetos EquiposDTO ONLINE
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
 
@@ -136,7 +135,15 @@ public class EquiposService {
         return equipos;
     }
 
-       
+    //Buscador por nombre API ONLINE   
+    public EquiposDTO getEquipoPorNombreAPI(String nombre) throws JsonMappingException, JsonProcessingException {
+        List<EquiposDTO> equipos = getEquiposDesdeAPI();
+
+        return equipos.stream()
+                .filter(equipo -> equipo.getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .orElse(null);
+    }
 
 
     public List<EquiposDTO> findAll() {
