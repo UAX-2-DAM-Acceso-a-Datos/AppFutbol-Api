@@ -17,8 +17,6 @@ import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
 import com.uax.accesodatos.AppFutbolApi.services.JugadoresService;
 
 
-
-
 @Controller
 public class EntrenadoresController {
 	
