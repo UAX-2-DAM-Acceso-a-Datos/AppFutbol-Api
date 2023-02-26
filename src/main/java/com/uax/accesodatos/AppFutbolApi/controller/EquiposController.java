@@ -41,7 +41,7 @@ public class EquiposController {
     @Autowired
 	AppFutbolUtils utils;
     
-    //Ir a equipos
+    //Ir a equipos y almacena equipos en una array y los pasa con model
     @GetMapping("/go-to-Equipos")
     public String showListaEquipos(Model model) throws IOException {
     	  ArrayList<EquiposDTO> equipos = equiposService.getEquiposJSON();
@@ -78,21 +78,23 @@ public class EquiposController {
         Root root = objectMapper.readValue(jsonResponse, Root.class);
 
         List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
-
+        //Condición para buscar el nombre de los equipos
         if (nombre != null && !nombre.isEmpty()) {
             equipos = equipos.stream()
                     .filter(equipo -> equipo.getNombre().toLowerCase().contains(nombre.toLowerCase()))
                     .collect(Collectors.toList());
         }
-
+        //Los devuelve con un model
         model.addAttribute("equipos", equipos);
 
         return "Equipos/ListaEquipos";
     }
 
+
     //Método temporal para convertirObjetoApiToDTO
     //para convertir los datos de "Root" 
     //en una lista de objetos "EquiposDTO"
+
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
@@ -110,6 +112,7 @@ public class EquiposController {
 
 	//Funcionalidad del boton de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos-json")
+
     public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
         EquiposDTO equipo = new EquiposDTO(id, nombre, pais, urlfoto);
@@ -117,6 +120,8 @@ public class EquiposController {
         
         return "redirect:/go-to-Favoritos";
     }
+
+
     
     @PostMapping("/add-equipos-favoritos-json")
     public String addEquipoFavoritoJSON(@RequestParam("id") int id, 
@@ -131,12 +136,26 @@ public class EquiposController {
     //Insertar equipos favoritos en base de datos desde la api
     @PostMapping("/add-equipos-favoritos-api")
     public String addEquipoFavoritoAPI(@RequestParam("id") int id, 
-                                    @RequestParam("nombre") String nombre,
-                                    @RequestParam("pais") String pais,
-                                    @RequestParam("urlfoto") String urlfoto) {
+                                        @RequestParam("nombre") String nombre,
+                                        @RequestParam("pais") String pais,
+                                        @RequestParam("urlfoto") String urlfoto) throws JsonMappingException, JsonProcessingException {
+        // Get the list of teams from the API
+        List<EquiposDTO> equipos = equiposService.getEquiposDesdeAPI();
+        
+        // Find the team with the matching ID
+        EquiposDTO equipo = equipos.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
 
+        // If the team was found, add it to the database
+        if (equipo != null) {
+            equiposService.addEquiposFavoritos(equipo);
+        }
 
         return "redirect:/go-to-Favoritos";
     }
+
+
 
 }

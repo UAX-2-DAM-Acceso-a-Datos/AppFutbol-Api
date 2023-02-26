@@ -43,8 +43,13 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
-//Convertir objeto api to dto
-    public List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
+    private static final String API_URL = "https://v3.football.api-sports.io/teams";
+    private static final String API_KEY = "95af3cd5edfeb7119cd7d3442536e507";
+    
+//Recuperar datos usando JSON 
+//Convertir objeto api to dto para json
+
+    public List<EquiposDTO> convertirObjetoApiToDTOJSON(Root root) {
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
             Team equipo = response.getTeam();
@@ -57,23 +62,28 @@ public class EquiposService {
         }
         return equipos;
     }
+
+
     //Obtener equipos desde JSON
     public ArrayList<EquiposDTO> getEquiposJSON() throws IOException {
+
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         String jsonResponse = utils.readFile("responseTeams.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Root root = objectMapper.readValue(jsonResponse, Root.class);
-        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTOJSON(root);
         return equipos;
     }
 
+
     //Obtiene equipo por nombre desde JSON
     public EquiposDTO getEquipoPorNombreJSON(String nombre) throws IOException {
+
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         String jsonResponse = utils.readFile("responsePlayers.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Root root = objectMapper.readValue(jsonResponse, Root.class);
-        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTO(root);
+        equipos = (ArrayList<EquiposDTO>) convertirObjetoApiToDTOJSON(root);
         for (EquiposDTO equipo : equipos) {
             if (equipo.getNombre().equalsIgnoreCase(nombre)) {
                 return equipo;
@@ -85,14 +95,14 @@ public class EquiposService {
     //Obtener equipos desde la api API-SPORTS ACCOUNT
     public List<EquiposDTO> getEquiposDesdeAPI() throws JsonMappingException, JsonProcessingException {
         String url = "https://v3.football.api-sports.io/teams";
-        String apiKey = "XxXxXxXxXxXxXxXxXxXxXxXx";
+        String apiKey = "95af3cd5edfeb7119cd7d3442536e507";
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-rapidapi-key", apiKey);
         headers.set("x-rapidapi-host", "v3.football.api-sports.io");
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
-            .queryParam("league", "39") // ID de la liga de la que se quieren obtener los equipos
-            .queryParam("season", "2022"); // Año de la temporada actual
+            .queryParam("league", "39")
+            .queryParam("season", "2022");
 
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
@@ -105,7 +115,6 @@ public class EquiposService {
 
         String jsonResponse = response.getBody();
 
-        // Convertir la respuesta JSON en una lista de objetos EquiposDTO
         ObjectMapper objectMapper = new ObjectMapper();
         Root root = objectMapper.readValue(jsonResponse, Root.class);
         List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
@@ -114,7 +123,20 @@ public class EquiposService {
     }
 
     
-    
+    // Convertir la respuesta JSON en una lista de objetos EquiposDTO
+    private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
+        List<EquiposDTO> equipos = new ArrayList<>();
+
+        for (Response response : root.response) {
+            Team team = response.team;
+            EquiposDTO equipo = new EquiposDTO(team.id, team.name, team.country, team.logo);
+            equipos.add(equipo);
+        }
+
+        return equipos;
+    }
+
+       
 
 
     public List<EquiposDTO> findAll() {
@@ -143,4 +165,6 @@ public class EquiposService {
 		
 		
 	}
+    
+
 }
