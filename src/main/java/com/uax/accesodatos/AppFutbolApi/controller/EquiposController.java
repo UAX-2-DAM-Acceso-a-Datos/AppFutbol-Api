@@ -93,7 +93,7 @@ public class EquiposController {
         String url = "https://v3.football.api-sports.io/teams";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-key", apiProperties.getKey()); // Aplication
+        headers.set("x-rapidapi-key", apiProperties.getKey()); // AplicationProperties KEY
         headers.set("x-rapidapi-host", "v3.football.api-sports.io");
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("search", nombre);
