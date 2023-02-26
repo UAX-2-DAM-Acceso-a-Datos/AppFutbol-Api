@@ -90,14 +90,11 @@ public class EquiposController {
         return "Equipos/ListaEquipos";
     }
 
-<<<<<<< HEAD
 
-    //Método temporal en controller para convertirObjetoApiToDTO
-=======
     //Método temporal para convertirObjetoApiToDTO
     //para convertir los datos de "Root" 
     //en una lista de objetos "EquiposDTO"
->>>>>>> develop
+
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
@@ -112,14 +109,10 @@ public class EquiposController {
         return equipos;
     }
 
-<<<<<<< HEAD
-	//Funcionalidad del boton para obtener datos de insertar en base de datos con JSON
-    @GetMapping("add-equipos-favoritos")
-=======
 
 	//Funcionalidad del boton de insertar en base de datos con JSON
     @GetMapping("add-equipos-favoritos-json")
->>>>>>> develop
+
     public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
         EquiposDTO equipo = new EquiposDTO(id, nombre, pais, urlfoto);
@@ -127,15 +120,8 @@ public class EquiposController {
         
         return "redirect:/go-to-Favoritos";
     }
-<<<<<<< HEAD
-    //Funcionalidad del boton para insertar datos de insertar en base de datos con JSON
-    @PostMapping("/add-equipos-favoritos")
-    public String addEquipoFavorito(@RequestParam("id") int id, 
-                                    @RequestParam("nombre") String nombre,
-                                    @RequestParam("pais") String pais,
-                                    @RequestParam("urlfoto") String urlfoto) {
-    
-=======
+
+
     
     @PostMapping("/add-equipos-favoritos-json")
     public String addEquipoFavoritoJSON(@RequestParam("id") int id, 
@@ -153,39 +139,8 @@ public class EquiposController {
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("pais") String pais,
                                     @RequestParam("urlfoto") String urlfoto) {
-
->>>>>>> develop
-
         return "redirect:/go-to-Favoritos";
     }
 
-<<<<<<< HEAD
-    
-//    //Buscador con API por pais pendiente de implementar
-//    @GetMapping("/equipos")
-//    public ModelAndView equipos(@RequestParam(name = "query", required = false) String query) throws IOException {
-//        ModelAndView modelAndView = new ModelAndView("Equipos/ListaEquipos");
-//        List<EquiposDTO> equipos;
-//        if (query != null && !query.isEmpty()) {
-//            EquiposResponseDTO equiposResponseDTO = equiposService.getEquiposFromApi();
-//            List<Response> response = equiposResponseDTO.getResponse();
-//            equipos = new ArrayList<>();
-//            for (Response equipo : response) {
-//                EquiposDTO equiposDTO = new EquiposDTO();
-//                equiposDTO.setNombre(equipo.getTeam().getName());
-//                equiposDTO.setPais(equipo.getTeam().getCountry());
-//                equiposDTO.setUrlfoto(equipo.getTeam().getLogo());
-//                equipos.add(equiposDTO);
-//            }
-//            equipos = equipos.stream().filter(equipo -> equipo.getPais().equalsIgnoreCase(query)).collect(Collectors.toList());
-//        } else {
-//            equipos = equiposService.findAll();
-//        }
-//        modelAndView.addObject("equipos", equipos);
-//        return modelAndView;
-//    }
 
-
-=======
->>>>>>> develop
 }

@@ -43,12 +43,10 @@ public class EquiposService {
     @Autowired
     EquiposRepository equiposrepository;
     
-<<<<<<< HEAD
     
 //Recuperar datos usando JSON 
-=======
 //Convertir objeto api to dto
->>>>>>> develop
+
     public List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         for (Response response : root.getResponse()) {
@@ -62,14 +60,11 @@ public class EquiposService {
         }
         return equipos;
     }
-<<<<<<< HEAD
-    
-    //Obtener equipos
-    public ArrayList<EquiposDTO> getEquipos() throws IOException {
-=======
+
+
     //Obtener equipos desde JSON
     public ArrayList<EquiposDTO> getEquiposJSON() throws IOException {
->>>>>>> develop
+
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         String jsonResponse = utils.readFile("responseTeams.json");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -78,13 +73,10 @@ public class EquiposService {
         return equipos;
     }
 
-<<<<<<< HEAD
-    //Obtener equipos por nombres   
-    public EquiposDTO getEquipoPorNombre(String nombre) throws IOException {
-=======
+
     //Obtiene equipo por nombre desde JSON
     public EquiposDTO getEquipoPorNombreJSON(String nombre) throws IOException {
->>>>>>> develop
+
         ArrayList<EquiposDTO> equipos = new ArrayList<>();
         String jsonResponse = utils.readFile("responsePlayers.json");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -98,8 +90,6 @@ public class EquiposService {
         return null;
     }
 
-<<<<<<< HEAD
-=======
     //Obtener equipos desde la api API-SPORTS ACCOUNT
     public List<EquiposDTO> getEquiposDesdeAPI() throws JsonMappingException, JsonProcessingException {
         String url = "https://v3.football.api-sports.io/teams";
@@ -131,10 +121,6 @@ public class EquiposService {
         return equipos;
     }
 
-    
-    
-
->>>>>>> develop
 
     public List<EquiposDTO> findAll() {
     	
@@ -163,28 +149,5 @@ public class EquiposService {
 		
 	}
     
-    
-    
-//    //Recuperar datos por búsqueda usando la API
-//    private final String urlEquiposApi = "https://v3.football.api-sports.io/teams?search=%Busqueda%";
-//    
-//    public JugadoresDTO getEquipoPorNombre(String nombre) throws IOException {
-//    	
-//        ArrayList<EquiposDTO> equipos = new ArrayList<>();
-//        
-//        String jsonResponse = utils.readFile("responseTeams.json");
-//        
-//        Gson gson = new Gson();
-//        Root root = gson.fromJson(jsonResponse, Root.class);
-//        equipos = (ArrayList<EquiposDTO>) convertirObjetoApitoDTO(root);
-//        
-//        for (EquiposDTO equipo: equipos) {
-//            if (equipo.getNombre().equalsIgnoreCase(nombre)) {
-//                return equipo;
-//            }
-//        }
-//        
-//        return null;
-//    }
 
 }
