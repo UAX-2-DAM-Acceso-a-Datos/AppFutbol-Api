@@ -44,15 +44,15 @@ public class EquiposController {
     //Ir a equipos
     @GetMapping("/go-to-Equipos")
     public String showListaEquipos(Model model) throws IOException {
-    	  ArrayList<EquiposDTO> equipos = equiposService.getEquipos();
+    	  ArrayList<EquiposDTO> equipos = equiposService.getEquiposJSON();
   	    model.addAttribute("equipos", equipos);
   	    
     	return "Equipos/ListaEquipos";
     }
     
     //Buscar equipos usando json
-    @GetMapping("/search-equipo")
-    public String mostrarEquipo(Model model, @RequestParam("nombre") String nombre) throws IOException {
+    @GetMapping("/search-equipo-json")
+    public String mostrarEquipoJSON(Model model, @RequestParam("nombre") String nombre) throws IOException {
         String jsonResponse = AppFutbolUtils.readFile("responseTeams.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Root root = objectMapper.readValue(jsonResponse, Root.class);
@@ -69,7 +69,26 @@ public class EquiposController {
 
         return "Equipos/ListaEquipos";
     }
+    
+    //Buscar equipos usando API
+    @GetMapping("/search-equipo-api")
+    public String mostrarEquipoAPI(Model model, @RequestParam("nombre") String nombre) throws IOException {
+        String jsonResponse = AppFutbolUtils.readFile("responseTeams.json");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root root = objectMapper.readValue(jsonResponse, Root.class);
 
+        List<EquiposDTO> equipos = convertirObjetoApiToDTO(root);
+
+        if (nombre != null && !nombre.isEmpty()) {
+            equipos = equipos.stream()
+                    .filter(equipo -> equipo.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        model.addAttribute("equipos", equipos);
+
+        return "Equipos/ListaEquipos";
+    }
 
     //Método temporal para convertirObjetoApiToDTO
     //para convertir los datos de "Root" 
@@ -90,7 +109,7 @@ public class EquiposController {
 
 
 	//Funcionalidad del boton de insertar en base de datos con JSON
-    @GetMapping("add-equipos-favoritos")
+    @GetMapping("add-equipos-favoritos-json")
     public String addEquipos(@RequestParam("id") int id, @RequestParam("nombre") String nombre,
                               @RequestParam("pais") String pais, @RequestParam("urlfoto") String urlfoto) {
         EquiposDTO equipo = new EquiposDTO(id, nombre, pais, urlfoto);
@@ -99,8 +118,19 @@ public class EquiposController {
         return "redirect:/go-to-Favoritos";
     }
     
-    @PostMapping("/add-equipos-favoritos")
-    public String addEquipoFavorito(@RequestParam("id") int id, 
+    @PostMapping("/add-equipos-favoritos-json")
+    public String addEquipoFavoritoJSON(@RequestParam("id") int id, 
+                                    @RequestParam("nombre") String nombre,
+                                    @RequestParam("pais") String pais,
+                                    @RequestParam("urlfoto") String urlfoto) {
+
+
+        return "redirect:/go-to-Favoritos";
+    }
+    
+    //Insertar equipos favoritos en base de datos desde la api
+    @PostMapping("/add-equipos-favoritos-api")
+    public String addEquipoFavoritoAPI(@RequestParam("id") int id, 
                                     @RequestParam("nombre") String nombre,
                                     @RequestParam("pais") String pais,
                                     @RequestParam("urlfoto") String urlfoto) {

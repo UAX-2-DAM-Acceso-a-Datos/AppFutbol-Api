@@ -31,6 +31,7 @@ public class WelcomeController {
 		return "login.html";
 	}
 	
+	//Index
     @GetMapping("/")
     public String home() throws IOException {
     	
@@ -39,6 +40,7 @@ public class WelcomeController {
         return "index";
     }
     
+    //Error
 	@RequestMapping("*/error")
 	public String showError404Generic(Exception ex) {
 		
