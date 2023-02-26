@@ -1,4 +1,4 @@
-package com.uax.accesodatos.AppFutbolApi.controller;
+	package com.uax.accesodatos.AppFutbolApi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
+import com.uax.accesodatos.AppFutbolApi.dto.estadios.EstadiosDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
+import com.uax.accesodatos.AppFutbolApi.services.EstadiosService;
 import com.uax.accesodatos.AppFutbolApi.services.JugadoresService;
 
 @Controller
@@ -23,6 +25,9 @@ public class FavoritosController {
     
     @Autowired
     private EquiposService equiposService;
+    
+    @Autowired
+    private EstadiosService estadiosService;
 	
     @GetMapping("/go-to-Favoritos")
     public String showListaJugadoresFavoritos(Model model) throws IOException {
@@ -32,6 +37,9 @@ public class FavoritosController {
     	
     	ArrayList<EquiposDTO> equipos = (ArrayList<EquiposDTO>) equiposService.findAll();
     	model.addAttribute("equiposfav",equipos);
+    	
+    	List<EstadiosDTO> estadios = estadiosService.getListaFavoritos();
+    	model.addAttribute("estadiosfav",estadios);
     	
     	
         return "Favoritos/ListaFavoritos";
@@ -51,6 +59,16 @@ public class FavoritosController {
 		
 		equiposService.deleteEquiposFavoritos(id);
 
+		return "redirect:/go-to-Favoritos";
+	}
+	
+	
+
+	@GetMapping("/delete-estadio")
+	public String deleteEstadioById(@RequestParam("idEstadio") int idEstadio) {
+		
+		estadiosService.deleteEstadiosFavoritos(idEstadio);
+	
 		return "redirect:/go-to-Favoritos";
 	}
 
