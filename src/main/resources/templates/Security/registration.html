@@ -2,9 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link th:href="@{/css/login.css}" rel="stylesheet" href=../static/css/login.css />
+<link th:href="@{/js/login.js}" rel="../static/js/login.js" href=../static/js/login.js ></link>
 <title>Registro</title>
 </head>
 <body>
+
 <h3>Registro</h3>
 <form method="post" th:action="@{/pantallaRegistro}" th:object="${usuario}">
 <pre>
