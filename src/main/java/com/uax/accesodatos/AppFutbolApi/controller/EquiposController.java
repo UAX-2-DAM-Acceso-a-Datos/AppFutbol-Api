@@ -136,11 +136,26 @@ public class EquiposController {
     //Insertar equipos favoritos en base de datos desde la api
     @PostMapping("/add-equipos-favoritos-api")
     public String addEquipoFavoritoAPI(@RequestParam("id") int id, 
-                                    @RequestParam("nombre") String nombre,
-                                    @RequestParam("pais") String pais,
-                                    @RequestParam("urlfoto") String urlfoto) {
+                                        @RequestParam("nombre") String nombre,
+                                        @RequestParam("pais") String pais,
+                                        @RequestParam("urlfoto") String urlfoto) throws JsonMappingException, JsonProcessingException {
+        // Get the list of teams from the API
+        List<EquiposDTO> equipos = equiposService.getEquiposDesdeAPI();
+        
+        // Find the team with the matching ID
+        EquiposDTO equipo = equipos.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        // If the team was found, add it to the database
+        if (equipo != null) {
+            equiposService.addEquiposFavoritos(equipo);
+        }
+
         return "redirect:/go-to-Favoritos";
     }
+
 
 
 }
