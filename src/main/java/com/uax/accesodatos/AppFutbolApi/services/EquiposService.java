@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.uax.accesodatos.AppFutbolApi.config.AppFutbolApiProperties;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.EquiposDTO;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.Root;
@@ -42,6 +43,9 @@ public class EquiposService {
     
     @Autowired
     EquiposRepository equiposrepository;
+    
+    @Autowired
+    private AppFutbolApiProperties apiProperties;
     
     //Datos de la API
     private static final String API_URL = "https://v3.football.api-sports.io/teams";
@@ -94,9 +98,8 @@ public class EquiposService {
     //Obtener equipos desde la api API-SPORTS ACCOUNT ONLINE
     public List<EquiposDTO> getEquiposDesdeAPI() throws JsonMappingException, JsonProcessingException {
         String url = "https://v3.football.api-sports.io/teams";
-        String apiKey = "95af3cd5edfeb7119cd7d3442536e507";
         HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-key", apiKey);
+        headers.set("x-rapidapi-key", apiProperties.getKey()); // AplicationProperties KEY
         headers.set("x-rapidapi-host", "v3.football.api-sports.io");
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)

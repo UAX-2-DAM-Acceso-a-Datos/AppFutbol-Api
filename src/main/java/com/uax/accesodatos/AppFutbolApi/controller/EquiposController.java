@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.uax.accesodatos.AppFutbolApi.config.AppFutbolApiProperties;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
 import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
@@ -45,6 +46,10 @@ public class EquiposController {
     @Autowired
 	AppFutbolUtils utils;
     
+    @Autowired
+    private AppFutbolApiProperties apiProperties;
+
+    
     //Ir a equipos y almacena equipos en una array y los pasa con model JSON LOCAL
     @GetMapping("/go-to-equipos-json")
     public String showListaEquiposJSON(Model model) throws IOException {
@@ -53,7 +58,7 @@ public class EquiposController {
   	    
     	return "Equipos/ListaEquipos";
     }
-  //Ir a equipos y almacena equipos en una array y los pasa con model API ONLINE
+    //Ir a equipos y almacena equipos en una array y los pasa con model API ONLINE
     @GetMapping("/go-to-equipos-api")
     public String showListaEquiposAPI(Model model) throws IOException {
         List<EquiposDTO> equipos = equiposService.getEquiposDesdeAPI();
@@ -61,7 +66,6 @@ public class EquiposController {
 
         return "Equipos/ListaEquipos";
     }
-
 
     //Buscar equipos usando JSON LOCAL
     @GetMapping("/search-equipo-json")
@@ -83,20 +87,20 @@ public class EquiposController {
         return "Equipos/ListaEquipos";
     }
     
-    //Buscar equipos usando API ONLINE
+    //BUSCADOR equipo por nombre usando API ONLINE
     @GetMapping("/search-equipo-api")
     public String mostrarEquipoAPI(Model model, @RequestParam("nombre") String nombre) {
-        String url = "https://api-football-v1.p.rapidapi.com/v3/teams";
+        String url = "https://v3.football.api-sports.io/teams";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-key", "95af3cd5edfeb7119cd7d3442536e507"); // Reemplaza YOUR_API_KEY con tu propia clave de API
-        headers.set("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
+        headers.set("x-rapidapi-key", apiProperties.getKey()); // Aplication
+        headers.set("x-rapidapi-host", "v3.football.api-sports.io");
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("search", nombre)
-                .queryParam("league", "39"); // Reemplaza 39 con el ID de la liga que deseas buscar
+                .queryParam("search", nombre);
         HttpEntity<?> entity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
         String jsonResponse = response.getBody();
+        System.out.println(jsonResponse); // Imprime la respuesta JSON en la consola
         ObjectMapper objectMapper = new ObjectMapper();
         Root root = null;
         try {
@@ -115,14 +119,16 @@ public class EquiposController {
 
     private List<EquiposDTO> convertirObjetoApiToDTO(Root root) {
         List<EquiposDTO> equipos = new ArrayList<>();
-        for (Response response : root.getResponse()) {
-            Team team = response.getTeam();
-            EquiposDTO equipo = new EquiposDTO();
-            equipo.setId(team.getId());
-            equipo.setNombre(team.getName());
-            equipo.setPais(team.getCountry());
-            equipo.setUrlfoto(team.getLogo());
-            equipos.add(equipo);
+        if (root != null) {
+            for (Response response : root.getResponse()) {
+                Team team = response.getTeam();
+                EquiposDTO equipo = new EquiposDTO();
+                equipo.setId(team.getId());
+                equipo.setNombre(team.getName());
+                equipo.setPais(team.getCountry());
+                equipo.setUrlfoto(team.getLogo());
+                equipos.add(equipo);
+            }
         }
         return equipos;
     }
@@ -140,7 +146,7 @@ public class EquiposController {
     }
 
 
-    
+  //Funcionalidad del boton de insertar en base de datos con JSON LOCAL
     @PostMapping("/add-equipos-favoritos-json")
     public String addEquipoFavoritoJSON(@RequestParam("id") int id, 
                                     @RequestParam("nombre") String nombre,

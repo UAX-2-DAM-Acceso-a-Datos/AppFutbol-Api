@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Root{
     public String get;
     public Parameters parameters;
-    public ArrayList<Object> errors;
+    public Object errors;
     public int results;
     public Paging paging;
     public ArrayList<Response> response;
@@ -22,10 +22,11 @@ public class Root{
 	public void setParameters(Parameters parameters) {
 		this.parameters = parameters;
 	}
-	public ArrayList<Object> getErrors() {
+
+	public Object getErrors() {
 		return errors;
 	}
-	public void setErrors(ArrayList<Object> errors) {
+	public void setErrors(Object errors) {
 		this.errors = errors;
 	}
 	public int getResults() {
