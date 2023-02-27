@@ -302,3 +302,11 @@ nav ul li span:hover {
 .fut-player-card .player-card-bottom .player-info .player-features .player-features-col:last-child {
   border: 0;
 }
+.logo-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  color: white;
+}

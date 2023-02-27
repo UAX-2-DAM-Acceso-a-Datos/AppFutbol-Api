@@ -146,3 +146,11 @@ nav ul li span:hover {
   color: #fff;
   top: 0;
 }
+.logo-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  color: white;
+}

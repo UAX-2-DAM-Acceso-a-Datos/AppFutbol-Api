@@ -33,7 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.uax.accesodatos.AppFutbolApi.config.AppFutbolApiProperties;
 import com.uax.accesodatos.AppFutbolApi.dto.equipos.*;
-import com.uax.accesodatos.AppFutbolApi.dto.jugadores.JugadoresDTO;
 import com.uax.accesodatos.AppFutbolApi.services.EquiposService;
 import com.uax.accesodatos.AppFutbolApi.utils.AppFutbolUtils;
 
@@ -87,7 +86,7 @@ public class EquiposController {
         return "Equipos/ListaEquipos";
     }
     
-    //BUSCADOR equipo por nombre usando API ONLINE
+  //BUSCADOR equipo por nombre usando API ONLINE
     @GetMapping("/search-equipo-api")
     public String mostrarEquipoAPI(Model model, @RequestParam("nombre") String nombre) {
         String url = "https://v3.football.api-sports.io/teams";
@@ -95,8 +94,10 @@ public class EquiposController {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-rapidapi-key", apiProperties.getKey()); // AplicationProperties KEY
         headers.set("x-rapidapi-host", "v3.football.api-sports.io");
+        String nombreModificado = nombre.replaceAll(" ", "+");
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("search", nombre);
+                        .queryParam("search", nombreModificado);
+
         HttpEntity<?> entity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
         String jsonResponse = response.getBody();
@@ -112,6 +113,8 @@ public class EquiposController {
         model.addAttribute("equipos", equipos);
         return "Equipos/ListaEquipos";
     }
+
+
 
     //Método temporal para convertirObjetoApiToDTO
     //para convertir los datos de "Root" 
