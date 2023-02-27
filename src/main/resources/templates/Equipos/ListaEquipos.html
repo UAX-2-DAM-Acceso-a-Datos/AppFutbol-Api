@@ -1,78 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sitio web de equipos de fútbol usando springboot">
+	<meta name="author" content="Aitor Nain Mendoza Vallejo">
 	<title>Búsca tu equipo por nombre!</title>
 	<!-- Carga de estilos de Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<!-- Carga de estilos de css -->
 	<link rel="stylesheet" type="text/css" href="/css/styleEquipos.css">
-	<link rel="icon" type="image/jpg" href="/images/logos/FIFA logo.png">
-	
+	<!-- Icono de página -->
+	<link rel="icon" type="image/jpg" href="/images/logos/FIFA-logo.png">
 </head>
 <body>
+<header>
+<div class="container-fluid">
+<!-- Logo cabecera -->
+  <div id="upper">
+    <h1><a class="logo-link" href="/">FOOTBALL<span style="color:red">API</span></a></h1>
+  </div>
+</div>
 <!-- Navbar -->
 <nav class="container-fluid ">
     <ul>
       <li class="main left"><span><a href="/" style="color:black; text-decoration: none;">INICIO</a></span></li>
-      <li class="main"><span><a href="/go-to-Equipos" style="color:black; text-decoration: none;">EQUIPOS</a></span></li>
+      <li class="main"><span><a href="/go-to-equipos-api" style="color:black; text-decoration: none;">EQUIPOS</a></span></li>
       <li class="main"><span><a href="/go-to-Jugadores" style="color:black; text-decoration: none;">JUGADORES</a></span></li>
       <li class="main"><span><a href="/go-to-Entrenadores" style="color:black; text-decoration: none;">ENTRENADORES</a></span></li>
       <li class="main"><span ><a href="/go-to-Estadios" style="color:black; text-decoration: none;">ESTADIOS</a></span>
       <li class="main right"><span><a href="/go-to-Favoritos" style="color:black; text-decoration: none;">FAVORITOS</a></span></li>
     </ul>
 </nav>
-<br><br>
-<!-- Fin del navbar -->
-<!-- Inicio del formulario para búsqueda de equipos -->
+</header>
+<!-- Fin del navbar y header-->
+<!-- Inicio del MAIN -->
+<main>
+<!-- Inicio contenido principal de la página    -->
  <div class="content"> 
-<!-- contenido principal de la página    -->
-<!-- Botón de buscar API ONLINE -->
+<div id="margen-top2" class="container-fluid">
+<!-- Inicio del formulario para búsqueda de equipos -->
     <form class="d-flex mb-4 mt-4" method="GET" action="/search-equipo-api">
-   <input type="text" class="form-control form-control-sm mr-2" id="searchQuery" name="nombre" placeholder="Búsqueda de equipos">
-
-    <button type="submit" class="btn btn-primary btn-sm">Buscar Por Nombre</button>
+   <!-- Botón de buscar API ONLINE -->
+   <input type="text" class="form-control mr-3" id="searchQuery" name="nombre" placeholder="Búsqueda de equipos por nombre">
+    <button type="submit" class="btn">Buscar Por Nombre</button>
   </form>
-   <!-- *** fut-player-card ***-->
+  </div>
+   <!-- *** TEAM CARD***-->
   <div id="fila" class="container">
   <div class="fut-player-card" th:each="equipo : ${equipos}">
-    <!-- Player Card Top-->
+    <!-- Team Card Top-->
     <div class="player-card-top">
       <div class="player-master-info">
       	<div class="player-rating">
-	<a th:href="@{'/add-equipos-favoritos-api?id=' + ${equipo?.id} + '&nombre=' + ${equipo?.nombre} + '&pais=' + ${equipo?.pais} + '&urlfoto=' + ${equipo?.urlfoto}}">
-  <span class="star-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-    </svg>
-  </span>
-</a>
-      	</div>
+			<a th:href="@{'/add-equipos-favoritos-api?id=' + ${equipo?.id} + '&nombre=' + ${equipo?.nombre} + '&pais=' + ${equipo?.pais} + '&urlfoto=' + ${equipo?.urlfoto}}">
+				  <span class="star-icon">
+				    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+				      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+				    </svg>
+				  </span>
+			</a>
       </div>
-      <div class="player-picture"><img th:attr="src=${equipo.urlfoto}" draggable="false"/>
       </div>
+      <!-- Escudo del equipo -->
+     <div class="player-picture"><img th:src="${equipo.urlfoto ?: '/images/messi_chiquito_default.jpg'}"alt="Logo del equipo ${equipo.nombre}"/></div>
     </div>
-    <!-- Player Card Bottom-->
+    <!-- Team Card Bottom-->
     <div class="player-card-bottom">
       <div class="player-info">
-        <!-- Player Name-->
+        <!-- Team Name-->
         <div class="player-name" ><span th:text="${equipo.nombre}"></span></div>
-        <!-- Player Features-->
+        <!-- Team Features-->
         <div class="player-features">
-          <div class="player-features-col"><span>
-          	  <div class="player-feature-title">NOMBRE: </div>
-              <div class="player-feature-value"  th:text="${equipo.nombre}"></div></span><span>
-              <div class="player-feature-title">PAÍS: </div>
-              <div class="player-feature-value"  th:text="${equipo.pais}"></div></span><span>
-        </div>
+		<div class="player-features-col">
+		    <span>
+		        <div class="player-feature-title">PAÍS: &nbsp;</div>
+		        <div class="player-feature-value" th:text="${equipo.pais}"></div>
+		    </span>
+		</div>
       </div>
     </div>
   </div>
   </div>
 </div>
-
-	<!-- Carga de scripts de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</main>
 </body>
+	<!-- Carga de scripts de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></body>
 </html>

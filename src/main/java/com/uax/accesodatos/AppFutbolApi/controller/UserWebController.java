@@ -16,13 +16,13 @@ public class UserWebController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/pantallaRegistro")
+	@GetMapping("/register")
 	public String irPantallaRegistro(Model model) {
 		
 		return "Security/registration";
 	}
 	
-	@PostMapping("/pantallaRegistro")
+	@PostMapping("/register")
 	public String registrarUsuarioWeb(@ModelAttribute("usuario") UsuarioDTO usuario) {
 		
 		usuario.setRoles("USER");
