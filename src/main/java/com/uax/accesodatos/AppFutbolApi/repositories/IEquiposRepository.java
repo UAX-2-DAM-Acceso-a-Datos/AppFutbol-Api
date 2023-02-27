@@ -9,5 +9,7 @@ public interface IEquiposRepository {
 	List<EquiposDTO> findAll();
 	public boolean saveEquipo(EquiposDTO equipo);
 	boolean deleteEquipo(int idEquipo);
+	EquiposDTO findById(int id);
+	boolean updateEquipo(EquiposDTO equipo);
 	
 }

@@ -38,6 +38,18 @@ public class EquiposRepository implements IEquiposRepository {
 	    return rowCount > 0;
 	}
 
-	
+	@Override
+	public EquiposDTO findById(int id) {
+	    String sql = "SELECT id, nombre, pais, urlfoto FROM equipos WHERE id = ?";
+	    EquiposDTO equipo = jdbcTemplate.queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<>(EquiposDTO.class));
+	    return equipo;
+	}
+
+	@Override
+	public boolean updateEquipo(EquiposDTO equipo) {
+	    String sql = "UPDATE equipos SET nombre = ?, pais = ?, urlfoto = ? WHERE id = ?";
+	    int rowCount = jdbcTemplate.update(sql, equipo.getNombre(), equipo.getPais(), equipo.getUrlfoto(), equipo.getId());
+	    return rowCount > 0;
+	}
 
 }
